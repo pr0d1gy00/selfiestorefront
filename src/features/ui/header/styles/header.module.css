@@ -1,0 +1,58 @@
+:root{
+	--title:#dcb270;
+    --border:#b98d73;
+}
+.header{
+    width: 100%;
+    height: 8rem;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--border);
+    
+}
+.actions{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.actions div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+.actions div img{
+    width: 5rem;
+}
+.actions div a{
+    text-decoration: none;
+    color: white;
+}
+
+@keyframes animationClick{
+    0%{
+        transform: rotate(0.5turn);    
+    }
+    50%{
+        transform: rotate(-1turn);
+    }
+    100%{
+        transform: rotate(0)
+    }
+}
+.buttonLogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background-color:transparent ;
+    border: none;
+
+}
+.buttonLogin img{
+    width: 3rem;
+}

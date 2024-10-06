@@ -1,0 +1,50 @@
+:root{
+    --title:#e1b170;
+    --h2:#91624a;
+    --p:#000000;
+}
+
+.containerTitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.containerTitle h1{
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--title);
+}
+.containerTitle h2{
+    font-size: 3rem;
+    color: var(--h2);
+    margin: 0 auto;
+}
+
+.containerTexts{
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+    height: 2rem;
+    font-size: 1.75rem;
+    line-height: 2rem;
+    overflow: hidden;
+}
+ul{
+    margin: 0;
+    list-style-type: none;
+    animation:movimiento 12s infinite;
+}
+@keyframes movimiento{
+    0%{margin-top: -10px;}
+    20%{margin-top: -10px;}
+    25%{margin-top: -30px;}
+    40%{margin-top: -30px;}
+    45%{margin-top: -50px;}
+    60%{margin-top: -50px;}
+    65%{margin-top: -70px;}
+    80%{margin-top: -70px;}
+    100%{margin-top: -10px;}
+}
