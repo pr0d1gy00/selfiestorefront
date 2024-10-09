@@ -14,8 +14,8 @@ export default function Header() {
             <div className={HeaderCSS.actions}>
                 {data.map(element=>
                 <div>
-                    <img src={element.iconPath} alt={element.content} />
-                    <a href="">{element.content}</a>
+                    <img id='image' src={element.iconPath} alt={element.content} />
+                    <a id='link' href="">{element.content}</a>
 
                 </div>
                 )}

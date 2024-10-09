@@ -3,7 +3,7 @@
     --border:#b98d73;
 }
 .header{
-    width: 100%;
+    max-width: 100%;
     height: 8rem;
     z-index: 1000;
     display: flex;
@@ -20,13 +20,14 @@
     gap: 2rem;
 }
 .actions div{
+    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: .5rem;
 }
 .actions div img{
-    width: 5rem;
+    width: 3rem;
 }
 .actions div a{
     text-decoration: none;

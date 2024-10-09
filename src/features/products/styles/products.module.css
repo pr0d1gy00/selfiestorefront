@@ -3,6 +3,9 @@
     --background:#f5f0e7;
     --backgroudCardRegister:#b98d73;
 }
+.container{
+    background-color: var(--background);
+}
 
 .container h1{
     color: var(--title);

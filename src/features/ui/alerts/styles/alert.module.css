@@ -1,0 +1,35 @@
+.alertContainer{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+.sucess{
+	display: flex;
+	justify-content: space-between;
+	background-color: white;
+	width: 28rem;
+	height: 14rem;
+	border-radius: 1rem;
+	padding: 1rem;
+	position: absolute;
+	top: 10rem;
+	gap:1rem
+}
+.error{
+	composes:sucess;
+}
+.sucess h2{
+	color: green;
+}
+.error h2{
+	color: rgb(144, 0, 0);
+}
+.alertContent p{
+	color: black
+}
+.alertImage{
+	display: flex;
+	align-items: center;
+	width: 4rem;
+	height: 4rem;
+}

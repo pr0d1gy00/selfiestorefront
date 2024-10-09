@@ -2,9 +2,11 @@ import Input from '../../ui/inputs/components/Input'
 import RegisterCSS from '../styles/register.module.css'
 import ButtonRegisterLogin from '../../ui/buttons/components/ButtonRegisterLogin'
 import Title from '../../ui/title/components/Title'
-import { ChangeEvent, Dispatch, FormEvent, useState } from 'react'
+import { ChangeEvent, Dispatch, FormEvent, useContext, useState } from 'react'
 import { RegisterUserInterface } from '../interfaces/RegisterInterfaces'
 import { registerActions } from '../../reducers/register-user'
+import Alert from '../../ui/alerts/components/Alert'
+import { RegisterContext } from '../context/RegisterContext'
 
 type RegisterFormProps ={
     dispatch:Dispatch<registerActions>
@@ -20,11 +22,16 @@ const initialState ={
 }
 
 export default function RegisterForm({dispatch}:RegisterFormProps) {
-
+	const context = useContext(RegisterContext)
     const [register,setRegister]=useState<RegisterUserInterface>(initialState)
+    const [showAlert, setShowAlert]=useState(false)
 
+    if (!context) {
+        throw new Error('RegisterContext must be used within a RegisterProvider');
+    }
+    
+    const {success} = context;
     const handleChange = (e:ChangeEvent<HTMLInputElement>)=>{
-
         setRegister({
             ...register,
             [e.target.id]:e.target.value
@@ -35,12 +42,22 @@ export default function RegisterForm({dispatch}:RegisterFormProps) {
     const handleSubmit = (e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         dispatch({type:'registerUSer',payload:{user:register}})
+        setShowAlert(true)
+        setTimeout(()=>{
+            setShowAlert(false)
+        },3000)
         // setRegister({
         //     ...initialState
         // })
     }
     return (
         <section className={RegisterCSS.containerRegister}>
+            {showAlert && (success ?
+                    <Alert title={'Registrado correctamente'} isOk={true} content={'Felicidades, ahora puedes comprar con gusto'}/> 
+                :
+                    <Alert title={'Error'} isOk={false} content={'Verifica los campos'}/> 
+            )}
+            
             <form action="POST" onSubmit={handleSubmit}>
                 <Title/>
                 {/* <div className={RegisterCSS.containerImage}>

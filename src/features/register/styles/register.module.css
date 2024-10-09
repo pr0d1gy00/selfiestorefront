@@ -41,3 +41,8 @@ p{
     font-size: 3rem;
     text-shadow: 3px 3px 1px var(--backgroudCardRegister);
 }
+@media (width>= 700px) { 
+    .containerForm{
+        width: 50rem;
+    }
+}

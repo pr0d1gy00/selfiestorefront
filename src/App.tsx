@@ -1,11 +1,13 @@
 import Header from './features/ui/header/components/Header'
 import { useReducer } from 'react'
-import { initialState, registerReducer } from './features/reducers/register-user'
+import { initialState, RegisterReducer } from './features/reducers/register-user'
 import RegisterForm from './features/register/components/RegisterForm'
+import ShowProducts from './features/products/components/ShowProducts'
 
 export default function App() {
-	const [state,dispatch]=useReducer(registerReducer,initialState)
+	const [state,dispatch]=useReducer(RegisterReducer,initialState)
 	console.log(state?.register)
+	
 	return (
 		<>
 			<Header/>
@@ -13,6 +15,7 @@ export default function App() {
 				dispatch={dispatch}
 				state={state?.register}
 			/>
+			{/* <ShowProducts/> */}
 		</>
 	)
 }
