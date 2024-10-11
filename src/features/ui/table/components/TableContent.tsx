@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC } from 'react';
 import TableCSS from '../styles/table.module.css'
 import EditIcon from '../../../../assets/MaterialSymbolsEdit.svg'
 import DeleteIcon from '../../../../assets/materialsymbolsdelete.svg'

@@ -40,7 +40,7 @@ export const RegisterReducer = (
     actions:RegisterActions
 
 )=>{
-    const {setSuccess,setError,setMsj}= useRegister();
+    const {setSuccess,setError,setMsj,setShowAlert}= useRegister();
     switch(actions.type){
         case'registerUSer':{
             CreateUser(actions.payload.user).then(response=>{
@@ -74,12 +74,20 @@ export const RegisterReducer = (
         case 'deleteCategory':{
             DeleteCategory(parseInt(actions.payload.id)).then(response=>{
                 console.log(response)
+                setShowAlert(true)
+                setTimeout(()=>{
+                    setShowAlert(false)
+                },3000)
                 setMsj(response.statusText)
                 setSuccess(true)
                 setError(false)
             }).catch(error=>{
                 console.log(error)
                 setError(true)
+                setShowAlert(true)
+                setTimeout(()=>{
+                    setShowAlert(false)
+                },3000)
                 setSuccess(false)
             })
             break;

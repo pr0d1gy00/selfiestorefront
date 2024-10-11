@@ -17,7 +17,6 @@ type CategoryFormProps={
 
 export default function CategoryTable({dispatch}:CategoryFormProps) {
 	const context = useContext(RegisterContext)
-	const [showAlert,setShowAlert]=useState(false)
 	const [dataContent,setDataContent]=useState<GetCategoryInterfaces[]>([])
 
 	if (!context) {
@@ -29,7 +28,7 @@ export default function CategoryTable({dispatch}:CategoryFormProps) {
 		{name:'Acciones'}
 
 	]
-    const {setError,error,setMsj,msj} = context;
+    const {setError,error,setMsj,msj,success,showAlert,setShowAlert} = context;
 
 	useEffect(()=>{
 		GetCategories().then(response=>{
@@ -45,9 +44,11 @@ export default function CategoryTable({dispatch}:CategoryFormProps) {
 	
 	return (
 		<div className={CategoryCSS.categoryTable}>
-			{showAlert && error ? 
-				<Alert title={'Error'} isOk={false} content={msj}/>
-			:null}
+			{showAlert && (success ?
+				<Alert title={msj} isOk={true} content={''}/> 
+			: 
+				<Alert title={'Error'} isOk={false} content={msj}/> 
+			)}
 			<OtherTitle title={'Bienvenido José!'} subtitle={'Aqui estan todas las categorias creadas!'}/>
 			<TableBody>
 				<TableHead data={data}/>

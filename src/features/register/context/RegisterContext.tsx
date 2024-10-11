@@ -10,6 +10,8 @@ export type RegisterContextProps = {
 		setError: Dispatch<SetStateAction<boolean>>;
 		msj:string,
 		setMsj:Dispatch<SetStateAction<string>>
+		showAlert:boolean
+		setShowAlert:Dispatch<SetStateAction<boolean>>
 }
 
 export const RegisterContext = createContext<RegisterContextProps | undefined>(undefined)

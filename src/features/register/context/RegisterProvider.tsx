@@ -11,10 +11,11 @@ export const RegisterProvider = ({children}:RegisterProviderProps)=>{
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
 	const [msj,setMsj]=useState('')
+	const [showAlert,setShowAlert]=useState(false)
 	if(!state)return
 
 	return(
-		<RegisterContext.Provider value={{ state, dispatch, success, error, setSuccess, setError,msj,setMsj }}>
+		<RegisterContext.Provider value={{ state, dispatch, success, error, setSuccess, setError,msj,setMsj,showAlert,setShowAlert}}>
 			{children}
 		</RegisterContext.Provider>
 	)
