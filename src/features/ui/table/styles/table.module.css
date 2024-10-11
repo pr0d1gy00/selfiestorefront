@@ -1,0 +1,66 @@
+:root{
+	--title:#dcb270;
+    --background:#f5f0e7;
+    --backgroudCardRegister:#b98d73;
+}
+
+.tableHead{
+	background-color: var(--backgroudCardRegister);
+	height: auto;
+	min-width: 24rem;
+	max-width: 35rem;
+	display: flex;
+}
+.tableHead p{
+	min-width: 12rem;
+	max-width: 12rem;
+	padding: 1.5rem;
+}
+.content{
+	min-width: 24rem;
+	max-width: 35rem;
+	background-color: #ffffff;
+	height: auto;
+	width: auto;
+	display: flex;
+}
+.content p{
+	min-width: 12rem;
+	max-width: 12rem;
+	height: auto;
+	padding: 1.5rem;
+	overflow: hidden;
+}
+
+.tableBody{
+	margin-top: 2rem;
+	min-width: 24rem;
+	max-width: 35rem;	
+	height: auto;
+	overflow-x: scroll;
+	border: 2px solid var(--backgroudCardRegister);
+	border-radius: 2rem;
+}
+.buttonAction{
+	display: flex;
+	justify-content:center ;
+	align-items: center;
+	width: 5rem;
+	background-color: transparent;
+	margin-right: 1rem;
+	border: none;
+}
+.buttonAction img{
+	width: 3rem;
+}
+@media (width > 900px) { 
+	.tableHead{
+		max-width: 70rem;
+	}
+	.content{
+		max-width: 70rem;
+	}
+	.tableBody{
+		max-width: 70rem;
+	}
+}

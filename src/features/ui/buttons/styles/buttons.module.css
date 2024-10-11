@@ -12,3 +12,6 @@
     background-color: var(--buttonRegisterLogin);
     color: #ffffff;
 }
+.buttonRegisterLogin:disabled{
+    opacity: .5;
+}

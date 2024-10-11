@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './globalStyles/normalize.css';
 import './globalStyles/styles.css';
@@ -7,9 +6,9 @@ import { RegisterProvider } from './features/register/context/RegisterProvider';
 
 createRoot(document.getElementById('root')!).render(
   
-  <StrictMode>
+  //<StrictMode>
     <RegisterProvider>
       <App/>
     </RegisterProvider>
-  </StrictMode>,
+  //</StrictMode>,
 )

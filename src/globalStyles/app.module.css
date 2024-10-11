@@ -1,0 +1,21 @@
+:root{
+	--title:#dcb270;
+    --background:#f5f0e7;
+    --backgroudCardRegister:#b98d73;
+}
+.containerAppContent{
+	width: 100%;
+	height: 100vh;
+}
+@media (min-width: 900px) { 
+	.containerApp{
+		display: flex;
+		width: 100%;
+	}
+	.containerApp .containerAppSidebar{
+		width: 20%;
+	}
+	.containerApp .containerAppContent{
+		width: 80%;
+	}
+}

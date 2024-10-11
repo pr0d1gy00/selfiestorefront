@@ -11,9 +11,10 @@ export default function Sidebar() {
     return (
         <aside className={SidebarCSS.aside}>
             <SidebarHeader/>
-            {sidebarData.map(item=>
+            {sidebarData.map((item,index)=>
                 <Item
                     data={item}
+                    index={index}
                 />
                 )
             }

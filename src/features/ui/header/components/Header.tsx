@@ -4,12 +4,15 @@ import LoginIcon from '../../../../assets/login.svg'
 import { useSidebarData } from '../../sidebar/hooks/useSidebarData'
 export default function Header() {
     const data = useSidebarData()
-
+    const size = document.documentElement.clientWidth
     return (
         <header className={HeaderCSS.header}>
-            <div>
-                <img src={MenuIcon} alt="Menu" />
-            </div>
+            {size < 1200 ?
+                <div>
+                    <img src={MenuIcon} alt="Menu" />
+                </div>
+                : null
+            }
             
             <div className={HeaderCSS.actions}>
                 {data.map(element=>

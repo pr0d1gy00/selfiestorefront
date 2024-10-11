@@ -1,0 +1,24 @@
+:root{
+	--title:#dcb270;
+    --background:#f5f0e7;
+    --backgroudCardRegister:#b98d73;
+}
+.othertitle{
+    width: 100%;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.othertitle h2{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    color: var(--backgroudCardRegister);
+}
+.othertitle h3{
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    text-shadow: 3px 3px 1px var(--backgroudCardRegister);
+}

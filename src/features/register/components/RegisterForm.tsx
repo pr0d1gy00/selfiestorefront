@@ -21,7 +21,7 @@ const initialState ={
     Email: ''
 }
 
-export default function RegisterForm({dispatch}:RegisterFormProps) {
+export default function RegisterForm({dispatch,state}:RegisterFormProps) {
 	const context = useContext(RegisterContext)
     const [register,setRegister]=useState<RegisterUserInterface>(initialState)
     const [showAlert, setShowAlert]=useState(false)

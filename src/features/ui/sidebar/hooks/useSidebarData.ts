@@ -1,7 +1,7 @@
 import { SidebarItemData } from "../interfaces/SIdebarData";
-import BuyIcon from '../../../../assets/bolsa-de-la-compra.png'
+import BuyIcon from '../../../../assets/bolsa-de-la-compra-sidebar.png'
 import { useEffect, useState } from "react";
-import ProductsIcon from '../../../../assets/ropa-limpia.png'
+import ProductsIcon from '../../../../assets/ropa-limpia-sidebar.png'
 
 
 const products : SidebarItemData ={
@@ -19,9 +19,15 @@ const buy : SidebarItemData = {
 }
 
 export const useSidebarData = ()=>{
-    const [sidebarData,setSidebarData]=useState<SidebarItemData[]>([])
+    const [sidebarData,setSidebarData]=useState<SidebarItemData[]>([
+
+    ])
 
     useEffect(()=>{
+        setSidebarData(()=>[
+            products,
+            buy
+        ])
 
         return setSidebarData(()=>[
             products,
