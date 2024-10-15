@@ -4,22 +4,37 @@ import { CategoryInterfaces } from "../category/interfaces/Category";
 import { useRegister } from "../register/context/useRegister";
 import { CreateUser } from "../register/helpers/CreateUser";
 import { RegisterUserInterface } from "../register/interfaces/RegisterInterfaces";
+import { RegisterProductInterfaces, UploadImagesProductsInterfaces } from "../products/interfaces/ProductsInterfaces";
+import { CreateProduct } from "../products/helpers/CreateProduct";
+import { UploadImageProduct } from "../products/helpers/UploadImageProduct";
 
 export type registerActions = {type:'registerUSer',payload:{user:RegisterUserInterface}}
+
 export type RegisterCategoryAction = {
     type: 'registerCategory';
     payload: { category: CategoryInterfaces };
 };
+
 export type DeleteCategoryAction ={
     type:'deleteCategory',
     payload:{id:string}
 }
 
+export type RegisterProductAction={
+    type:'registerProduct',
+    payload:{product:RegisterProductInterfaces}
+}
+export type UploadImagesProducts={
+    type:'uploadProduct',
+    payload:{uploadImages:UploadImagesProductsInterfaces}
+}
+
 export type registerState = {
     register:RegisterUserInterface
     category:CategoryInterfaces
+    product:RegisterProductInterfaces
 }
-export type RegisterActions = registerActions | RegisterCategoryAction | DeleteCategoryAction;
+export type RegisterActions = registerActions | RegisterCategoryAction | DeleteCategoryAction | RegisterProductAction | UploadImagesProducts;
 
 export const initialState ={ 
     register:{
@@ -32,6 +47,23 @@ export const initialState ={
     },
     category:{
         name:''
+    },
+    product:{
+        Category_id: '1',
+        Name_product: '',
+        Description: '' ,
+        Image:null,
+        Status: '1',
+        Price:'0',
+        Amount_inventory:'0'
+    },
+    uploadImage:{
+        id:'',
+        image1:undefined,
+        image2:undefined,
+        image3:undefined,
+        image4:undefined,
+        image5:undefined,
     }
 }
 
@@ -88,6 +120,32 @@ export const RegisterReducer = (
                 setTimeout(()=>{
                     setShowAlert(false)
                 },3000)
+                setSuccess(false)
+            })
+            break;
+        }
+        case 'registerProduct':{
+            CreateProduct(actions.payload.product).then(response=>{
+                console.log(response)
+                setMsj(response.statusText)
+                setSuccess(true)
+                setError(false)
+            }).catch(error=>{
+                console.log(error)
+                setError(true)
+                setSuccess(false)
+            })
+            break;
+        }
+        case 'uploadProduct':{
+            UploadImageProduct(actions.payload.uploadImages).then(response=>{
+                console.log(response)
+                setMsj(response ? response.statusText : '')
+                setSuccess(true)
+                setError(false)
+            }).catch(error=>{
+                console.log(error)
+                setError(true)
                 setSuccess(false)
             })
             break;

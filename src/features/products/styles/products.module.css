@@ -10,7 +10,8 @@
 .containerRegisterProducts{
     background-color: var(--background);
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,6 +37,7 @@
 }
 .registerProducts{
     border-radius: 1rem;
+    margin-bottom: 2rem;
     padding: 2rem;
     width:30rem;
     height: auto;
@@ -142,6 +144,16 @@
     font-size: 1.2rem;
     border-style: none;
 }
+.previewImage{
+    width: 7rem;
+    height: 7rem;
+    margin-top: 1rem;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+.containerPreviewImages{
+    display: flex;
+}
 @media (width > 600px) { 
     .productsContainer{
         display:grid;
@@ -154,6 +166,7 @@
 @media (width > 800px) { 
     .registerProducts{
         width: 50rem;
+
     }
     .productsHeader{
         width: 70%;
@@ -194,6 +207,14 @@
         height: 6rem;
         overflow: hidden;
     }
+}
+.productsTable{
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media (width > 1200px) {

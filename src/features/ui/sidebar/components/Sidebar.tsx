@@ -15,6 +15,7 @@ export default function Sidebar() {
                 <Item
                     data={item}
                     index={index}
+                    key={index}
                 />
                 )
             }

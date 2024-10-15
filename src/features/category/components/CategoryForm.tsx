@@ -15,7 +15,7 @@ type CategoryFormProps={
 	dispatch: Dispatch<RegisterActions>
 }
 
-export default function CategoryForm({state,dispatch}:CategoryFormProps) {
+export default function CategoryForm({dispatch}:CategoryFormProps) {
 	const context = useContext(RegisterContext)
 	const [name, setName]=useState(initialState)
     const [showAlert, setShowAlert]=useState(false)

@@ -8,8 +8,10 @@
 	background-color: var(--backgroudCardRegister);
 	height: auto;
 	min-width: 24rem;
-	max-width: 35rem;
+	width: 100%;
+	max-width: 100rem;
 	display: flex;
+	justify-content: space-between;
 }
 .tableHead p{
 	min-width: 12rem;
@@ -18,10 +20,10 @@
 }
 .content{
 	min-width: 24rem;
-	max-width: 35rem;
+	max-width: 100rem;
 	background-color: #ffffff;
 	height: auto;
-	width: auto;
+	width: 100%;
 	display: flex;
 }
 .content p{
@@ -55,12 +57,12 @@
 }
 @media (width > 900px) { 
 	.tableHead{
-		max-width: 70rem;
+		max-width: 100rem;
 	}
 	.content{
-		max-width: 70rem;
+		max-width: 100rem;
 	}
 	.tableBody{
-		max-width: 70rem;
+		max-width: 100rem;
 	}
 }

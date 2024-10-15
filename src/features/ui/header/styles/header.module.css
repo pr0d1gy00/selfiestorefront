@@ -3,6 +3,7 @@
     --border:#b98d73;
 }
 .header{
+    width: 100%;
     max-width: 100%;
     height: 8rem;
     z-index: 1000;

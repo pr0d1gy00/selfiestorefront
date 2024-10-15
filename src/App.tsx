@@ -4,6 +4,9 @@ import { initialState, RegisterReducer } from './features/reducers/register-user
 import Sidebar from './features/ui/sidebar/components/Sidebar'
 import AppCSS from './globalStyles/app.module.css'
 import CategoryTable from './features/category/components/CategoryTable'
+import RegisterProducts from './features/products/components/RegisterProducts'
+import ShowProductsTable from './features/products/components/ShowProductsTable'
+import UploadImagesProducts from './features/products/components/UploadImagesProducts'
 
 export default function App() {
 	const [state,dispatch]=useReducer(RegisterReducer,initialState)
@@ -20,10 +23,18 @@ export default function App() {
 						state={state?.category}
 						dispatch={dispatch}
 					/> */}
-					<CategoryTable
-					dispatch={dispatch}/>
+					{/* <RegisterProducts
+						state={state?.product}
+						dispatch={dispatch}
+					/> */}
+					{/* <ShowProductsTable dispatch={dispatch}/> */}
+					<UploadImagesProducts
+						dispatch={dispatch}
+					/>
+					{/* <CategoryTable
+					dispatch={dispatch}/> */}
 				</div>
-				{/* <RegisterProducts/> */}
+				
 			
 
 			</div>

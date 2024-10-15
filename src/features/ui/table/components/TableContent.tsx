@@ -7,10 +7,12 @@ interface TableContentProps{
 	dataContent: Array<Record<string, string>>;
 	dispatch?: Dispatch<RegisterActions>
 	showActions:boolean
+	showEdit:boolean
+	showDelete:boolean
 }
 
 
-const TableContent:FC<TableContentProps>=({dataContent,dispatch,showActions}) =>{
+const TableContent:FC<TableContentProps>=({dataContent,dispatch,showActions,showDelete,showEdit}) =>{
 	return (
 		<div>
 			{dataContent === null || dataContent.length === 0 ?
@@ -23,17 +25,26 @@ const TableContent:FC<TableContentProps>=({dataContent,dispatch,showActions}) =>
 			))}
 			{showActions ?
 				<>
-					<button className={TableCSS.buttonAction}>
-						<img src={EditIcon} alt="editar" />
-					</button>
-					<button className={TableCSS.buttonAction}
+					{showEdit ? 
+						<button className={TableCSS.buttonAction}>
+							<img src={EditIcon} alt="editar" />
+						</button> 
+					:
+						null
+					}
+					{showDelete ? 
+						<button className={TableCSS.buttonAction}
 						onClick={()=>{
 							if(!dispatch)return
 							dispatch({type:'deleteCategory',payload:{id:Object.entries(item)[0][1]}})
 						}}
-					>
-						<img src={DeleteIcon} alt="eliminar" />
-					</button>
+						>
+							<img src={DeleteIcon} alt="eliminar" />
+						</button>
+					:
+						null
+					}
+					
 				</>
 				:
 				null

@@ -28,7 +28,7 @@ export default function CategoryTable({dispatch}:CategoryFormProps) {
 		{name:'Acciones'}
 
 	]
-    const {setError,error,setMsj,msj,success,showAlert,setShowAlert} = context;
+    const {setError,setMsj,msj,success,showAlert,setShowAlert} = context;
 
 	useEffect(()=>{
 		GetCategories().then(response=>{
@@ -53,9 +53,9 @@ export default function CategoryTable({dispatch}:CategoryFormProps) {
 			<TableBody>
 				<TableHead data={data}/>
 				<TableContent
-					showActions={true} 
+					showActions={true}
 					dataContent={dataContent}
-					dispatch={dispatch}/>
+					dispatch={dispatch} showEdit={true} showDelete={true}/>
 			</TableBody>
 		</div>
 	)
