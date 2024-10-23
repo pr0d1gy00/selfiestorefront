@@ -2,14 +2,13 @@ import { chromium, firefox } from "playwright";
 import fs from "fs";
 
 async function getDollarPrice() {
-	const browser = await chromium.launch({ headless: true });
+	const browser = await chromium.launch({ headless: false });
 
 	const page = await browser.newPage();
 
 	await page.goto("https://www.bcv.org.ve/",{
-		timeout:60000,
-		waitUntil:'domcontentloaded'
-	});
+		timeout:60000
+		});
 	const priceDollar = await page.$$eval(
 		"#dolar * strong",
 		(elements) =>
@@ -35,5 +34,5 @@ async function getDollarPrice() {
 	);
 }
 
-	getDollarPrice();
+getDollarPrice();
 

@@ -1,14 +1,42 @@
 import Card from "./Card";
-import franelaOversize from '../../../assets/franelaOversize.jpeg'
 import data from '../../../../public/priceDollar.json'
 import ProductsCSS from '../styles/products.module.css'
 import Logo from '../../../assets/logo.webp'
+import { useContext, useEffect, useState } from "react";
+import { GetProducts } from "../helpers/GetProducts";
+import { GetProductsInterfaces} from "../interfaces/ProductsInterfaces";
+import { RegisterContext } from "../../register/context/RegisterContext";
+import Alert from "../../ui/alerts/components/Alert";
 export default function ShowProducts() {
+    const context = useContext(RegisterContext)
+    const [productsToShow,setProductsToShow]=useState<GetProductsInterfaces[] | null>(null)
+
+	if (!context) {
+        throw new Error('RegisterContext must be used within a RegisterProvider');
+    }
+    const {setError,setMsj,msj,success,showAlert,setShowAlert} = context;
 
     let dollar = data.price
 
+    useEffect(()=>{
+        GetProducts().then(response=>{
+			setProductsToShow(response)
+		}).catch(error=>{
+			console.log(error)
+			setError(true)
+			setMsj('Error al mostrar las categorias')
+			setShowAlert(true)
+			setTimeout(()=>{setShowAlert(false)},5000)
+		})
+    },[])
+
     return (
         <div className={ProductsCSS.container}>
+            {showAlert && (success ?
+				<Alert title={msj} isOk={true} content={''}/> 
+			: 
+				<Alert title={'Error'} isOk={false} content={msj}/> 
+			)}
             <div className={ProductsCSS.productsHeader
             }>   
                 <div>
@@ -22,12 +50,12 @@ export default function ShowProducts() {
                 
             </div>
             <div className={ProductsCSS.productsContainer}>
-                <Card title={"Camisa Oversize para caballeros"} img={franelaOversize} price={(10.99).toString()} id={(1).toString()} description="Tremenda camisa para que vistas a la moda y puedas enamorar very muchas nenasdddddddddddddddddddddddddddddddddgsffffffffffffffffffffddddddd"/>
-                <Card title={"Camisa Oversize para caballeros"} img={franelaOversize} price={(10.99*dollar).toFixed(2).toString()} id={(1).toString()} description="Tremenda camisa para que vistas a la moda y puedas enamorar very muchas nenas"/>
-                <Card title={"Camisa Oversize para caballeros"} img={franelaOversize} price={(10.99).toString()} id={(1).toString()} description="Tremenda camisa para que vistas a la moda y puedas enamorar very muchas nenas"/>
-                <Card title={"Camisa Oversize para caballeros"} img={franelaOversize} price={(10.99).toString()} id={(1).toString()} description="Tremenda camisa para que vistas a la moda y puedas enamorar very muchas nenas"/>
-                <Card title={"Camisa Oversize para caballeros"} img={franelaOversize} price={(10.99).toString()} id={(1).toString()} description="Tremenda camisa para que vistas a la moda y puedas enamorar very muchas nenas"/>
-                <Card title={"Camisa Oversize para caballeros"} img={franelaOversize} price={(10.99).toString()} id={(1).toString()} description="Tremenda camisa para que vistas a la moda y puedas enamorar very muchas nenas"/>
+                {productsToShow === null || productsToShow.length ===0 ?(
+                    <h2 className={ProductsCSS.textNoProducts}>No hay productos para mostrar</h2>
+                ):
+                productsToShow?.map(products=>
+                    <Card id={products.IdProduct} title={products.Name_product} img={`http://localhost/selfistore/${products.Image}`} price={`${products.Price}`} description={products.Description}/>
+                )}
             </div>
         </div>
         

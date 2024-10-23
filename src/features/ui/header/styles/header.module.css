@@ -12,6 +12,7 @@
     align-items: center;
     padding: 1rem;
     background-color: var(--border);
+    color: white;
     
 }
 .actions{
@@ -53,6 +54,7 @@
     font-size: 2rem;
     background-color:transparent ;
     border: none;
+    color: white;
 
 }
 .buttonLogin img{

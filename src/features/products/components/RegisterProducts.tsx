@@ -61,7 +61,7 @@ export default function RegisterProducts({state,dispatch}:RegisterProductsProps)
 			console.log(error)
 		})
 	},[])
-
+	console.log(product)
 	return (
 		<section className={ProductsCSS.containerRegisterProducts}>
 			<OtherTitle title={"Bienvenido Jose"} subtitle={"Registra tu producto aquí!"}/>
@@ -77,7 +77,7 @@ export default function RegisterProducts({state,dispatch}:RegisterProductsProps)
 					<p className={ProductsCSS.textRegisterProducts}>Descripción</p>
 					<Input type="text" id="Description" onChange={handleChange} value={product.Description} placeholder="pantalon para que vistas a la moda"/>
 					<p className={ProductsCSS.textRegisterProducts}>Estado</p>
-					<select title="status" id="Status" onChange={handleChange} value={product.Category_id}>
+					<select title="status" id="Status" onChange={handleChange} value={product.Status}>
 						<option value="1" key={1}>Disponible</option>
 						<option value="0" key={0}>Agotado</option>
 					</select>

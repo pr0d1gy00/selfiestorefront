@@ -7,6 +7,8 @@ import CategoryTable from './features/category/components/CategoryTable'
 import RegisterProducts from './features/products/components/RegisterProducts'
 import ShowProductsTable from './features/products/components/ShowProductsTable'
 import UploadImagesProducts from './features/products/components/UploadImagesProducts'
+import ShowProducts from './features/products/components/ShowProducts'
+import ShowProductSelected from './features/products/components/ShowProductSelected'
 
 export default function App() {
 	const [state,dispatch]=useReducer(RegisterReducer,initialState)
@@ -16,9 +18,10 @@ export default function App() {
 			<Header/>
 			<div className={AppCSS.containerApp}>
 				<div className={AppCSS.containerAppSidebar}>
-					<Sidebar/>
+					{/* <Sidebar/> */}
 				</div>
 				<div className={AppCSS.containerAppContent}>
+					<ShowProductSelected/>
 					{/* <CategoryForm
 						state={state?.category}
 						dispatch={dispatch}
@@ -28,11 +31,12 @@ export default function App() {
 						dispatch={dispatch}
 					/> */}
 					{/* <ShowProductsTable dispatch={dispatch}/> */}
-					<UploadImagesProducts
+					{/* <UploadImagesProducts
 						dispatch={dispatch}
-					/>
+					/> */}
 					{/* <CategoryTable
 					dispatch={dispatch}/> */}
+					{/* <ShowProducts/> */}
 				</div>
 				
 			

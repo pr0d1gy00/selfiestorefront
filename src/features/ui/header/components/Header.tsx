@@ -1,28 +1,18 @@
 import HeaderCSS from '../styles/header.module.css'
 import MenuIcon from '../../../../assets/menu.svg'
-import LoginIcon from '../../../../assets/login.svg'
-import { useSidebarData } from '../../sidebar/hooks/useSidebarData'
+import LoginIcon from '../../../../assets/login.png'
+import useScreenSize from '../../../hooks/useScreenSize'
 export default function Header() {
-    const data = useSidebarData()
-    const size = document.documentElement.clientWidth
+    const {width}=useScreenSize()
     return (
         <header className={HeaderCSS.header}>
-            {size < 1200 ?
+            {width < 1200 ?
                 <div>
                     <img src={MenuIcon} alt="Menu" />
                 </div>
                 : null
             }
-            
-            <div className={HeaderCSS.actions}>
-                {data.map((element,index)=>
-                <div key={index}>
-                    <img id='image' src={element.iconPath} alt={element.content} />
-                    <a id='link' href="">{element.content}</a>
 
-                </div>
-                )}
-            </div>
             <div>
                 <button className={HeaderCSS.buttonLogin}>
                     Login

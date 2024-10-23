@@ -2,12 +2,15 @@ export type RegisterProductInterfaces ={
 	Category_id: string,
 	Name_product: string,
 	Description: string ,
-	Image:null,
+	Image:string | null,
 	Status: string,
 	Price:string,
 	Amount_inventory:string
 }
-export type GetProductsInterfaces = Omit<RegisterProductInterfaces, 'Image'> &{
+export type GetProductsInterfaces = RegisterProductInterfaces&{
+	IdProduct:string
+}
+export type GetProductsToShowInterfaces=RegisterProductInterfaces&{
 	IdProduct:string
 }
 export type UploadImagesProductsInterfaces ={
@@ -24,4 +27,8 @@ export type imageProducsInterfaces = {
 	image3:File | undefined,
 	image4:File | undefined,
 	image5:File | undefined
+}
+
+export type ImageProductSelected = {
+	Images:string
 }

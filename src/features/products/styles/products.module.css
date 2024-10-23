@@ -31,7 +31,7 @@
 .registerProducts select{
     width: 100%;
     height: 4rem;
-    border-radius: 2rem;
+    border-radius:1rem;
     border:none;
     padding: 1rem;
 }
@@ -70,7 +70,8 @@
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     padding: 1rem;
 }
 .productsHeader{
@@ -108,6 +109,10 @@
     height: 5rem;
     margin-bottom: 1rem;
 }
+.cardProductInfoTitlePrice p{
+    max-width: 11rem;
+    text-align: start
+}
 .cardProductInfo p{
     border-style: dashed;
     font-size: 2rem;
@@ -116,11 +121,14 @@
     align-items: center;
     color: #ffffff;
     padding: 0 0.5rem 0 0.5rem;
+    overflow: hidden;
 }
 .cardProduct .cardProductInfo h2{
+    max-width: 13rem;
     font-size: 2rem;
     color: #ffffff;
     margin: 0;
+    overflow: hidden;
 }
 
 .cardProductImage{
@@ -154,6 +162,104 @@
 .containerPreviewImages{
     display: flex;
 }
+/**************** ESTILOS PARA CUANDO EL USUARIO LE DE CLICK A UN PRODUCTO ***********************/
+.showProductSelectedContainer{
+    background-color: var(--background);
+    min-height: 100vh;
+    height: auto;
+    width: 100%;
+}
+.productSelectedContainer{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.imageProductSelectedContainer{
+    position: relative;
+    width: 100%;
+    height: 40rem;
+}
+.imageProductSelected{
+    width: 100%;
+    height: 40rem;
+    object-fit: cover;
+}
+.infoProductSelectedContainer{
+    width: 100%;
+    padding: 2rem;
+    background-color: white;
+}
+.infoProductSelectedContainer p{
+    margin-bottom: 1rem;
+
+}
+.infoProductSelectedContainer button{
+    height: 5rem;
+    width: 100%;
+    border: none;
+    background-color: var(--backgroudCardRegister);
+    color: white;
+    border-radius: 1rem;
+}
+.buttonsContainer{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.buttonsContainer button{
+    height: 5rem;
+    width: 5rem;
+    background-color: rgba(255,255,255,0.5);
+    border:none;
+}
+.buttonsContainer button img{
+    width: 3rem;
+
+}
+/*************** PRODUCTOS RELACIONADOS ****************/
+.relatedProducts{
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    width: 100%;
+    gap: 1rem;
+}
+.relatedProducts h2{
+    font-size: 3rem;
+    border-bottom:2px solid var(--backgroudCardRegister) ;
+
+}
+.relatedProductCardContainer{
+    width: 100%;
+    overflow-x: scroll;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 2rem;
+}
+.relatedProductCardContainer::-webkit-scrollbar{
+    background-color:transparent ;
+}
+.relatedProductCard{
+    width: 20rem;
+    height: 25rem;
+    border-radius: 1rem;
+    background-color: var(--backgroudCardRegister);
+}
+.relatedProductCard p{
+    height: 5rem;
+    overflow: hidden;
+    padding: 1rem;
+    color: white;
+}
+.relatedProductCard img{
+    border-radius: 1rem 1rem 0 0;
+    width: 20rem;
+}
 @media (width > 600px) { 
     .productsContainer{
         display:grid;
@@ -161,6 +267,22 @@
         align-items: center;
         justify-items: center;
         margin: 0 auto;
+    }
+    .productSelectedContainer{
+        flex-direction: row;
+        align-items: normal;
+    }
+    .imageProductSelectedContainer{
+        width: 100%;
+        height: 60rem;
+    }
+    .imageProductSelected{
+        height: 60rem;
+        object-fit: cover;
+    }
+    .infoProductSelectedContainer{
+        width: 50%;
+        width: 60rem;
     }
 }
 @media (width > 800px) { 
@@ -170,7 +292,6 @@
     }
     .productsHeader{
         width: 70%;
-        margin: 0 auto;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -207,6 +328,22 @@
         height: 6rem;
         overflow: hidden;
     }
+    .productSelectedContainer{
+        flex-direction: row;
+        align-items: normal;
+    }
+    .imageProductSelectedContainer{
+        width: 100%;
+        height: 60rem;
+    }
+    .imageProductSelected{
+        height: 60rem;
+        object-fit: cover;
+    }
+    .infoProductSelectedContainer{
+        width: 50%;
+        width: 60rem;
+    }
 }
 .productsTable{
     width: 100%;
@@ -221,32 +358,31 @@
 
     .container h1{
         text-align: start;
-        margin-left:20%; 
+        margin-left:10%; 
         font-size: 6rem;
     } 
     .container h2{
         font-size: 4rem;
         text-align: start;
-        margin-left: 20%;
+        margin-left: 10%;
     }
     .container h3{
         font-size: 2rem;
         text-align: start;
-        margin-left: 20%;
+        margin-left: 10%;
     }
     .productsContainer{
-        max-width: 60%;
         display:grid;
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(4,1fr);
+        align-items: start;
         gap:0.5rem;
-        margin: 0 auto;
     }
     .cardProduct{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-width: 35rem;
-        max-width: 35rem;
+        min-width: 27rem;
+        max-width: 27rem;
         height:35rem;
         border: none;
         margin: 0 auto;
@@ -260,6 +396,25 @@
     }
     .cardProductDescription{
         height: 4rem;
+        overflow: hidden;
+    }
+    .productSelectedContainer{
+        flex-direction: row;
+        align-items: normal;
+    }
+    .imageProductSelectedContainer{
+        width: 100%;
+        height: 70rem;
+    }
+    .imageProductSelected{
+        height: 70rem;
+        object-fit: cover;
+
+    }
+    .infoProductSelectedContainer{
+        width: 50%;
+        width: 70rem;
+        max-width: 70rem;
         overflow: hidden;
     }
 }

@@ -13,7 +13,7 @@ type UploadImagesProductsProps ={
 	dispatch:Dispatch<RegisterActions>
 }
 const initialState ={
-	id:'',
+	id:'0',
 	image1:undefined,
 	image2:undefined,
 	image3:undefined,
@@ -24,7 +24,7 @@ export default function UploadImagesProducts({dispatch}:UploadImagesProductsProp
 	const context = useContext(RegisterContext)
 	const [dataContent,setDataContent]=useState<GetProductsInterfaces[]>([])
 	const [selectedImages,setSelectedImages]=useState<UploadImagesProductsInterfaces>(initialState)
-	console.log(selectedImages)
+
 	if (!context) {
         throw new Error('RegisterContext must be used within a RegisterProvider');
     }
@@ -55,6 +55,7 @@ export default function UploadImagesProducts({dispatch}:UploadImagesProductsProp
         },3000)
 		setSelectedImages({...initialState})
 	}
+	
 	const disableButton=!selectedImages.image1 || !selectedImages.image2 || !selectedImages.image3 || !selectedImages.image4|| !selectedImages.image5 || selectedImages.id === '0'
 	
 	useEffect(()=>{
@@ -85,7 +86,8 @@ export default function UploadImagesProducts({dispatch}:UploadImagesProductsProp
 							...selectedImages,
 							id:e.target.value
 						})
-					}}>
+					}} value={selectedImages.id}>
+						<option value="0">Seleccionar producto</option>
 						{dataContent.map(dataContent=>
 							<option value={dataContent.IdProduct}>{dataContent.Name_product}</option>
 						)}
@@ -165,8 +167,6 @@ export default function UploadImagesProducts({dispatch}:UploadImagesProductsProp
 							}
 
 						</div>
-						
-
 					)}
 					</div>
 					<ButtonRegisterLogin title='Registrar' disabled={disableButton}/>

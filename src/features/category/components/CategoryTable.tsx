@@ -49,7 +49,6 @@ export default function CategoryTable({dispatch}:CategoryFormProps) {
 			: 
 				<Alert title={'Error'} isOk={false} content={msj}/> 
 			)}
-			<OtherTitle title={'Bienvenido José!'} subtitle={'Aqui estan todas las categorias creadas!'}/>
 			<TableBody>
 				<TableHead data={data}/>
 				<TableContent
