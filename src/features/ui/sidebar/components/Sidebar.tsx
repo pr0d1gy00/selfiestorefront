@@ -3,23 +3,33 @@ import { useSidebarData } from '../hooks/useSidebarData'
 import SidebarHeader from './SidebarHeader';
 import Item from './Item';
 
+type SidebarProps ={
+    showSidebar:boolean
+}
 
-export default function Sidebar() {
+export default function Sidebar({showSidebar}:SidebarProps) {
     const sidebarData = useSidebarData();
 
     console.log(sidebarData)
     return (
-        <aside className={SidebarCSS.aside}>
-            <SidebarHeader/>
-            {sidebarData.map((item,index)=>
-                <Item
-                    data={item}
-                    index={index}
-                    key={index}
-                />
-                )
-            }
+        <>
+            {showSidebar ?
+                <aside className={SidebarCSS.aside}>
+                    <SidebarHeader/>
+                    {sidebarData.map((item,index)=>
+                        <Item
+                            data={item}
+                            index={index}
+                            key={index}
+                        />
+                        )
+                    }
 
-        </aside>
+                </aside>
+                :null
+            }
+        </>
+        
+        
     )
 }

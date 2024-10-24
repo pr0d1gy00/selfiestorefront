@@ -7,7 +7,7 @@ type RelatedProductsProps={
 export default function RelatedProducts({image,nameProduct}:RelatedProductsProps) {
 	return (
 		<div className={ProductsCSS.relatedProductCard}>
-			<img src={image} alt={nameProduct} />
+			<img src={image} alt={nameProduct} loading='lazy' />
 			<p>{nameProduct}</p>
 		</div>	
 

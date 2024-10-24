@@ -60,3 +60,48 @@
 .buttonLogin img{
     width: 3rem;
 }
+.buttonLoginCartContainer{
+    display: flex;
+    position: relative;
+}
+.buttonCart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background-color:transparent ;
+    border: none;
+    color: white;
+    width:5rem;
+}
+.buttonCart img{
+    width: 3rem;
+}
+.contentCart{
+    z-index: 111;
+    border-radius: 1rem;
+    position: absolute;
+    top: 7rem;
+    left: -15rem;
+    background-color: white;
+    width: 30rem;
+    border: 1px solid var(--border);
+    height: auto;
+}
+.contentCart h3{
+    margin-top: 1rem;
+    color: var(--border);
+    z-index: 111;
+    width: 100%;
+    height: 3rem;
+    text-align: center;
+}
+.buttonSidebar{
+    border: none;
+    background-color: transparent;
+}
+@media (width> 1200px) { 
+    .contentCart{
+        left: 0;
+    }
+}

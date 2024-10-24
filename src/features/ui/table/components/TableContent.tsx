@@ -20,35 +20,35 @@ const TableContent:FC<TableContentProps>=({dataContent,dispatch,showActions,show
 				:  
 			dataContent.map((item, index) => (
 			<div key={index} className={TableCSS.content}>
-			{Object.entries(item).map(([key, value]) => (
-				<p key={key}>{`${value}`}</p>
-			))}
-			{showActions ?
-				<>
-					{showEdit ? 
-						<button className={TableCSS.buttonAction}>
-							<img src={EditIcon} alt="editar" />
-						</button> 
+				{Object.entries(item).map(([key, value]) => (
+					<p key={key}>{`${value}`}</p>
+				))}
+				{showActions ?
+					<>
+						{showEdit ? 
+							<button className={TableCSS.buttonAction}>
+								<img src={EditIcon} alt="editar" />
+							</button> 
+						:
+							null
+						}
+						{showDelete ? 
+							<button className={TableCSS.buttonAction}
+							onClick={()=>{
+								if(!dispatch)return
+								dispatch({type:'deleteCategory',payload:{id:Object.entries(item)[0][1]}})
+							}}
+							>
+								<img src={DeleteIcon} alt="eliminar" />
+							</button>
+						:
+							null
+						}
+						
+					</>
 					:
-						null
-					}
-					{showDelete ? 
-						<button className={TableCSS.buttonAction}
-						onClick={()=>{
-							if(!dispatch)return
-							dispatch({type:'deleteCategory',payload:{id:Object.entries(item)[0][1]}})
-						}}
-						>
-							<img src={DeleteIcon} alt="eliminar" />
-						</button>
-					:
-						null
-					}
-					
-				</>
-				:
-				null
-			}
+					null
+				}
 			</div>
 		))}
 		</div>

@@ -7,9 +7,14 @@ import { GetProducts } from "../helpers/GetProducts";
 import { GetProductsInterfaces} from "../interfaces/ProductsInterfaces";
 import { RegisterContext } from "../../register/context/RegisterContext";
 import Alert from "../../ui/alerts/components/Alert";
+import { useNavigate } from 'react-router-dom';
 export default function ShowProducts() {
     const context = useContext(RegisterContext)
     const [productsToShow,setProductsToShow]=useState<GetProductsInterfaces[] | null>(null)
+    const navigate = useNavigate();
+    const handleProductClick = (id: string) => {
+        navigate(`/product/detailsproduct/${id}`);
+    };
 
 	if (!context) {
         throw new Error('RegisterContext must be used within a RegisterProvider');
@@ -54,7 +59,7 @@ export default function ShowProducts() {
                     <h2 className={ProductsCSS.textNoProducts}>No hay productos para mostrar</h2>
                 ):
                 productsToShow?.map(products=>
-                    <Card id={products.IdProduct} title={products.Name_product} img={`http://localhost/selfistore/${products.Image}`} price={`${products.Price}`} description={products.Description}/>
+                    <Card key={products.IdProduct} onClick={()=>handleProductClick(products.IdProduct)} id={products.IdProduct} title={products.Name_product} img={`http://localhost/selfistore/${products.Image}`} price={`${products.Price}`} description={products.Description}/>
                 )}
             </div>
         </div>

@@ -260,6 +260,48 @@
     border-radius: 1rem 1rem 0 0;
     width: 20rem;
 }
+/********* ESTILOS PARA EL PRODUCTO DEL CARRITO *********/
+.productCart{
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--backgroudCardRegister);
+    width: 100%;
+    height: 6rem;
+    margin-bottom: 1rem;
+}
+.infoProductCart{
+    display: flex;
+    gap: 1rem;
+}
+.infoProductCart p{
+    color: var(--backgroudCardRegister);
+}
+.productCart img{
+    width: 4rem;
+}
+.productCart button{
+    background-color: transparent;
+    border: none;
+}
+.productCart button img{
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.productsTable{
+    width: 100%;
+    height: auto;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
 @media (width > 600px) { 
     .productsContainer{
         display:grid;
@@ -345,14 +387,7 @@
         width: 60rem;
     }
 }
-.productsTable{
-    width: 100%;
-    height: 100vh;
-    background-color: var(--background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 @media (width > 1200px) {
 

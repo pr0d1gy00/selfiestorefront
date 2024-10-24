@@ -17,7 +17,7 @@ type ProductSelectedProps={
 export default function ProductSelected({title,ammount,description,price,images}:ProductSelectedProps) {
 	const image = images
 	const [selectedIndex, setSelectedIndex]=useState(0)
-	const [selectedImage,setSelectedImage]=useState(image[selectedIndex].Images)
+	const [selectedImage,setSelectedImage]=useState(image[0].Images)
 
 	let dollar = data.price
 	console.log(image)
@@ -41,7 +41,7 @@ export default function ProductSelected({title,ammount,description,price,images}
 					<h2>Cargando</h2> 
 					:
 					<>
-						<img src={`http://localhost/selfistore/${selectedImage}`} alt={title}
+						<img src={`http://localhost/selfistore/${selectedImage}`} loading='lazy' alt={title}
 						className={ProductsCSS.imageProductSelected}/>
 						<div className={ProductsCSS.buttonsContainer}>
 							<button type='button' title='back' onClick={previous}><img src={ArrowBack} alt="Back" /></button>

@@ -4,6 +4,8 @@ import ProductSelected from './ProductSelected'
 import { GetProductSelected } from '../helpers/GetProductSelected'
 import { GetProductsInterfaces, ImageProductSelected } from '../interfaces/ProductsInterfaces'
 import RelatedProducts from './RelatedProducts'
+import { useParams } from 'react-router-dom'
+
 
 const initialState={
 	IdProduct:'',
@@ -23,32 +25,32 @@ export default function ShowProductSelected() {
 	const [images, setImages] = useState<ImageProductSelected[]>(imageDefault)
 	const [productSelected,setProductSelected]=useState<GetProductsInterfaces>(initialState)
 	const [relatedProducts,setRelatedProducts]=useState<GetProductsInterfaces[] | null>(null)
-
+	const {id}=useParams()
 	useEffect(()=>{
-		GetProductSelected().then(response=>{
+		if(!id)return
+		GetProductSelected(parseInt(id)).then(response=>{
 			setProductSelected(response[0])
 			setImages(response[1])
 			setRelatedProducts(response[2])
 		}).catch(error=>{	
 			console.log(error)
 		})
-	},[])
-	console.log(images)
+	},[id])
+	console.log(relatedProducts)
 	return (
 		<div className={ProductsCSS.showProductSelectedContainer}>
-			<ProductSelected title={productSelected?.Name_product} ammount={productSelected?.Amount_inventory} description={productSelected?.Description} price={productSelected?.Price} images={images ? images : imageDefault}/>
+			<ProductSelected title={productSelected?.Name_product} ammount={productSelected?.Amount_inventory} description={productSelected?.Description} price={productSelected?.Price} images={images}/>
 			<div className={ProductsCSS.relatedProducts}>
 				<h2>Productos relacionados</h2>
-				{relatedProducts === null || relatedProducts.length === 0?
-					<h3>No hay productos</h3>
-				:
 					<div className={ProductsCSS.relatedProductCardContainer}>
-						{relatedProducts.map(relatedProducts=>
-						<RelatedProducts image={`http://localhost/selfistore/public/ImageProducts/bolso.jpg`} nameProduct={relatedProducts.Name_product}/>
+						{relatedProducts === undefined || relatedProducts === null?
+							<h3>No hay productos relacionados</h3>
+						:relatedProducts.map(relatedProducts=>
+						<RelatedProducts image={`http://localhost/selfistore/public/ImageProducts/pantalon.jpg`} nameProduct={relatedProducts.Name_product}/>
 						)}
 					</div>
 					
-				}
+				
 			</div>
 		</div>
 	)

@@ -32,3 +32,12 @@ export type imageProducsInterfaces = {
 export type ImageProductSelected = {
 	Images:string
 }
+export type RegisterProductInterfacesEditInterfaces ={
+	Category_id: string,
+	Name_product: string,
+	Description: string ,
+	Url:string | null,
+	Status: string,
+	Price:string,
+	Amount_inventory:string
+}
