@@ -2,37 +2,36 @@ import { chromium, firefox } from "playwright";
 import fs from "fs";
 
 async function getDollarPrice() {
-	const browser = await chromium.launch({ headless: true });
+	let browser;
+    try {
+        browser = await firefox.launch({ headless: true });
+        const page = await browser.newPage();
+        await page.goto("https://www.bcv.org.ve/", { timeout: 60000, waitUntil:'load'});
 
-	const page = await browser.newPage();
+        const priceDollar = await page.$$eval(
+            "#dolar * strong",
+            (elements) => elements.map(el => parseFloat(el.innerText.replace(",", ".")).toFixed(2))[0]
+        );
 
-	await page.goto("https://www.bcv.org.ve/",{
-		timeout:60000
-		});
-	const priceDollar = await page.$$eval(
-		"#dolar * strong",
-		(elements) =>
-			elements.map(el =>+parseFloat(el.innerText.replace(",", ".")).toFixed(2))[0]
-			
-	);
-	await browser.close();
-	const dataString = JSON.stringify({
-		price: priceDollar,
-	});
-	const folder = "./public";
+        const dataString = JSON.stringify({ price: priceDollar });
+        const folder = "./public";
+        const filePath = `${folder}/dollarPrice.json`;
+        
+        if (!fs.existsSync(folder)) {
+            fs.mkdirSync(folder);
+        }
 
-	fs.writeFileSync(
-		`${folder}/priceDollar.json`,
-		dataString,
-		(err) => {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Data saved");
-			}
-		}
-	);
+        fs.writeFileSync(filePath, dataString);
+        console.log("Precio del dólar guardado en:", filePath);
+    } catch (error) {
+        console.error("Error al obtener el precio del dólar:", error);
+    } finally {
+        if (browser) {
+            await browser.close();
+        }
+    }
 }
-
 getDollarPrice();
+setInterval(getDollarPrice, 60000);
+
 

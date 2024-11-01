@@ -2,8 +2,11 @@ import { SidebarItemData } from "../interfaces/SIdebarData";
 import BuyIcon from '../../../../assets/bolsa-de-la-compra-sidebar.png'
 import { useEffect, useState } from "react";
 import ProductsIcon from '../../../../assets/ropa-limpia-sidebar.png'
-
-
+import RegisterUserIcon from '../../../../assets/agregar.png'
+import UploadImagesIcon from '../../../../assets/subir-imagenes.png'
+import ProductsListIcon from '../../../../assets/lista-productos.png'
+import RegisterProductsAndCategoriesIcon from '../../../../assets/anadir.png'
+import CategoriesListIcon from '../../../../assets/categorias.png'
 const products : SidebarItemData ={
     content: "Productos",
     iconPath:ProductsIcon ,
@@ -19,40 +22,41 @@ const buy : SidebarItemData = {
 }
 const registerProductForm : SidebarItemData = {
     content: 'Registrar Producto',
-    iconPath: BuyIcon,
+    iconPath: RegisterProductsAndCategoriesIcon,
     type: "submenu",
     path: "product/register"
 }
 const showProductsRegistered : SidebarItemData = {
     content: 'Lista de productos',
-    iconPath: BuyIcon,
+    iconPath: ProductsListIcon,
     type: "submenu",
     path: "product/showList"
 }
 const RegisterCategoryForm : SidebarItemData = {
     content: 'Registrar categoria',
-    iconPath: BuyIcon,
+    iconPath: RegisterProductsAndCategoriesIcon,
     type: "submenu",
     path: "category/register"
 }
+const ShowCategoriesTable : SidebarItemData = {
+    content: 'Lista Categorias',
+    iconPath: CategoriesListIcon,
+    type: "submenu",
+    path: "category/showList"
+}
 const UploadImagesProductsForm : SidebarItemData = {
     content: 'Imagen Producto',
-    iconPath: BuyIcon,
+    iconPath: UploadImagesIcon,
     type: "submenu",
     path: "products/upload/images"
 }
 const RegisterUserForm : SidebarItemData = {
     content: 'Registrarme',
-    iconPath: BuyIcon,
+    iconPath: RegisterUserIcon,
     type: "submenu",
     path: "user/register"
 }
-const ShowCategoriesTable : SidebarItemData = {
-    content: 'Lista Categorias',
-    iconPath: BuyIcon,
-    type: "submenu",
-    path: "category/showList"
-}
+
 export const useSidebarData = ()=>{
     const [sidebarData,setSidebarData]=useState<SidebarItemData[]>([
 
@@ -65,9 +69,10 @@ export const useSidebarData = ()=>{
             registerProductForm,
             showProductsRegistered,
             RegisterCategoryForm,
+            ShowCategoriesTable,
             UploadImagesProductsForm,
-            RegisterUserForm,
-            ShowCategoriesTable
+            RegisterUserForm
+            
         ])
 
         return setSidebarData(()=>[
@@ -76,9 +81,10 @@ export const useSidebarData = ()=>{
             registerProductForm,
             showProductsRegistered,
             RegisterCategoryForm,
+            ShowCategoriesTable,
             UploadImagesProductsForm,
-            RegisterUserForm,
-            ShowCategoriesTable
+            RegisterUserForm
+            
             ]
         )
 

@@ -24,12 +24,11 @@ const initialState ={
 	Amount_inventory:'0'
 }
 
-export default function RegisterProducts({state,dispatch}:RegisterProductsProps) {
+export default function RegisterProducts({dispatch}:RegisterProductsProps) {
 	const context = useContext(RegisterContext)
 	const [categories, setCategories]=useState<GetCategoryInterfaces[] | null>(null)
 	const [product,setProduct]=useState<RegisterProductInterfaces>(initialState)
     const [showAlert, setShowAlert]=useState(false)
-	console.log(state?.Description)
 	if (!context) {
         throw new Error('RegisterContext must be used within a RegisterProvider');
     }
@@ -44,13 +43,15 @@ export default function RegisterProducts({state,dispatch}:RegisterProductsProps)
 	const handleSubmit=(e:FormEvent<HTMLFormElement>)=>{
 		e.preventDefault()
 		dispatch({type:'registerProduct',payload:{product:product}})
-		setShowAlert(true)
+		setTimeout(()=>setShowAlert(true),500)
         setTimeout(()=>{
             setShowAlert(false)
         },4000)
-		setProduct({
-			...initialState
-		})
+		if(success){
+			setProduct({
+				...initialState
+			})
+		}
 		
 	}
 	const disableButton = product.Price === '0' || product.Amount_inventory === '0' || product.Name_product.length < 3 || product.Description.length < 3;
@@ -61,7 +62,6 @@ export default function RegisterProducts({state,dispatch}:RegisterProductsProps)
 			console.log(error)
 		})
 	},[])
-	console.log(product)
 	return (
 		<section className={ProductsCSS.containerRegisterProducts}>
 			<OtherTitle title={"Bienvenido Jose"} subtitle={"Registra tu producto aquí!"}/>

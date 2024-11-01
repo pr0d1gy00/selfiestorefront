@@ -8,6 +8,8 @@ import RegisterCategoryFormPage from "../Pages/RegisterCategoryFormPage";
 import UploadImagesProductsPage from "../Pages/UploadImagesProductsPage";
 import RegisterUserFormPage from "../Pages/RegisterUserFormPage";
 import ShowCategoriesTablePage from "../Pages/ShowCategoriesTablePage";
+import LoginForm from "../features/login/components/LoginForm";
+import LoginFormPage from "../Pages/LoginFormPage";
 
 export const router = createBrowserRouter([
 
@@ -39,6 +41,10 @@ export const router = createBrowserRouter([
 			{
 				path:'category/showList',
 				element:<ShowCategoriesTablePage/>
+			},
+			{
+				path:'user/login/auth',
+				element:<LoginFormPage/>
 			}
 		]
 	}

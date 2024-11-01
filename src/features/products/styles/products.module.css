@@ -193,7 +193,7 @@
 }
 .infoProductSelectedContainer p{
     margin-bottom: 1rem;
-
+    color: var(--backgroudCardRegister);
 }
 .infoProductSelectedContainer button{
     height: 5rem;
@@ -262,6 +262,7 @@
 }
 /********* ESTILOS PARA EL PRODUCTO DEL CARRITO *********/
 .productCart{
+    background-color: var(--background);
     padding: 1rem;
     display: flex;
     gap: 1rem;
@@ -269,18 +270,51 @@
     align-items: center;
     color: var(--backgroudCardRegister);
     width: 100%;
-    height: 6rem;
+    height: 8rem;
     margin-bottom: 1rem;
+    text-align: left;
+}
+.productCart:nth-child(2n){
+    background-color: white;
+}
+.infoProductCart .nameProduct{
+    margin-top: 2rem;
+    min-width: 12rem;
+    width: 12rem;
+    max-width: 12rem;
+    height: 3.7rem;
+    max-height: 3.7rem;
+    overflow: hidden;
+}
+
+.productCart:last-child{
+    border-bottom: none;
 }
 .infoProductCart{
     display: flex;
     gap: 1rem;
+    min-width: 20rem;
+    width: 20rem;
+    max-width: 20rem;
+}
+.buttonsQuantity{
+    display: flex;
+    align-items: center;
+    margin-right:2rem ;
+}
+.buttonsQuantity p{
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+.buttonsQuantity button img{
+    width: 1.2rem;
 }
 .infoProductCart p{
     color: var(--backgroudCardRegister);
 }
 .productCart img{
     width: 4rem;
+    max-width: 4rem;
 }
 .productCart button{
     background-color: transparent;

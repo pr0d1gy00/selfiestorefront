@@ -9,8 +9,6 @@ type SidebarProps ={
 
 export default function Sidebar({showSidebar}:SidebarProps) {
     const sidebarData = useSidebarData();
-
-    console.log(sidebarData)
     return (
         <>
             {showSidebar ?

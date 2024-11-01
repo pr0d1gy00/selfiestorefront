@@ -1,6 +1,8 @@
 :root{
 	--title:#dcb270;
     --border:#b98d73;
+    --background:#f5f0e7;
+
 }
 .header{
     width: 100%;
@@ -82,11 +84,19 @@
     border-radius: 1rem;
     position: absolute;
     top: 7rem;
-    left: -15rem;
+    right: 5%;
     background-color: white;
-    width: 30rem;
+    width: 32rem;
     border: 1px solid var(--border);
     height: auto;
+    padding: 1rem;
+}
+.AmountTotal{
+    margin-top: 1rem;
+    color: var(--border);
+}
+.AmountTotal p{
+    color: var(--border);
 }
 .contentCart h3{
     margin-top: 1rem;

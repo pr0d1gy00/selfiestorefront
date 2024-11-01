@@ -13,7 +13,6 @@ p{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background-color: var(--background);
 }
@@ -32,4 +31,10 @@ p{
     margin-bottom: 3rem;
     font-size: 3rem;
     text-shadow: 3px 3px 1px var(--backgroudCardRegister);
+}
+@media (width>800px) { 
+    .containerForm{
+        width: 50rem;
+        height: 30rem;
+    }
 }

@@ -1,14 +1,14 @@
-import CategoryForm from '../features/category/components/CategoryForm'
 import { useReducer } from 'react'
+import LoginForm from '../features/login/components/LoginForm'
 import { initialState, RegisterReducer } from '../features/reducers/register-user'
 
-export default function RegisterCategoryFormPage() {
+export default function LoginFormPage() {
 	const [state,dispatch]=useReducer(RegisterReducer,initialState)
-
+	console.log(state?.register)
 	return (
-		<CategoryForm
+		<LoginForm
 			dispatch={dispatch}
-			state={state?.category}
+			state={state?.login}
 		/>
 	)
 }

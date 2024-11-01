@@ -7,6 +7,8 @@ import { RegisterUserInterface } from "../register/interfaces/RegisterInterfaces
 import { RegisterProductInterfaces, UploadImagesProductsInterfaces } from "../products/interfaces/ProductsInterfaces";
 import { CreateProduct } from "../products/helpers/CreateProduct";
 import { UploadImageProduct } from "../products/helpers/UploadImageProduct";
+import { LoginUser } from "../login/helpers/LoginUser";
+import { CartItem } from "../ui/header/interfaces/HeaderInterfaces";
 
 export type registerActions = {type:'registerUSer',payload:{user:RegisterUserInterface}}
 
@@ -14,7 +16,10 @@ export type RegisterCategoryAction = {
     type: 'registerCategory';
     payload: { category: CategoryInterfaces };
 };
-
+export type LoginUserAction ={
+    type:'loginUser',
+    payload:{id:string,password:string}
+}
 export type DeleteCategoryAction ={
     type:'deleteCategory',
     payload:{id:string}
@@ -33,9 +38,18 @@ export type registerState = {
     register:RegisterUserInterface
     category:CategoryInterfaces
     product:RegisterProductInterfaces
+    login:{id:string,password:string}
+    cart:CartItem[]
 }
-export type RegisterActions = registerActions | RegisterCategoryAction | DeleteCategoryAction | RegisterProductAction | UploadImagesProducts;
+export type addToCartActions = { type:'addToCart', payload:{cart:CartItem}}
+export type increaseQuantity = {type: 'increaseQuantity', payload:{id:CartItem['id']}}
+export type decreaseQuantity = {type: 'decreaseQuantity', payload:{id:CartItem['id']}}
+export type clearCart =    { type: 'clear-cart' }
 
+export type RegisterActions = registerActions | RegisterCategoryAction | DeleteCategoryAction | RegisterProductAction | UploadImagesProducts | LoginUserAction | addToCartActions | increaseQuantity | decreaseQuantity | clearCart;
+
+
+const localStorageCart = localStorage.getItem('cart')
 export const initialState ={ 
     register:{
         Id: '',
@@ -43,7 +57,8 @@ export const initialState ={
         Name_user: '',
         Last_name: '',
         Phome_number: '',
-        Email: ''
+        Email: '',
+        Rol_id:'1'
     },
     category:{
         name:''
@@ -64,20 +79,31 @@ export const initialState ={
         image3:undefined,
         image4:undefined,
         image5:undefined,
-    }
+    },
+    login:{
+        id:'',
+        password:''
+    },
+    cart: localStorageCart ? JSON.parse(localStorageCart) : []
+
 }
 
 export const RegisterReducer = (
-    state:registerState = initialState,
+    state:registerState =initialState,
     actions:RegisterActions
 
 )=>{
-    const {setSuccess,setError,setMsj,setShowAlert}= useRegister();
+    const context = useRegister()
+    if(!context)return
+    const {setSuccess,setError,setMsj,setShowAlert}= context;
+
     switch(actions.type){
         case'registerUSer':{
             CreateUser(actions.payload.user).then(response=>{
                 console.log(response)
-                setSuccess(true)
+                if(response.ok){
+                    setSuccess(true)
+                }
                 setError(false)
             }).catch(error=>{
                 console.log(error)
@@ -150,7 +176,83 @@ export const RegisterReducer = (
             })
             break;
         }
+        case 'loginUser':{
+            LoginUser({id:actions.payload.id, password:actions.payload.password}).then(response=>{
+                setMsj(response ? response.statusText : '')
+                setError(false)
+                if(response.ok){
+                    setSuccess(true)
+                }
+            }).catch(error=>{
+                console.log(error)
+                setError(true)
+                setSuccess(false)
+            }) 
+            break;     
+        }
+        case 'addToCart':{
+            console.log(actions.payload.cart.id)
+            const productExist = state.cart.find(product=> product.id === actions.payload.cart.id)
+            let updatedCart : CartItem[] = []
+            console.log(productExist)
+            if(productExist){
+                updatedCart = state.cart.map(product =>{
+                    if(product.id === actions.payload.cart.id){
+                        return{
+                            ...product,
+                            quantity: product.quantity + 1
+                        }
+                    }else{
+                        return product
+                    }
+                }
+                )
+            }else{
+                const newItem : CartItem = {...actions.payload.cart,quantity:1} 
+                updatedCart = [...state.cart, newItem]
+            }
+            return {
+                ...state,
+                cart:updatedCart
+            }
+            
+        }
+        case 'decreaseQuantity':{
+            const cart = state.cart.map(product=>{
+                if(product.id === actions.payload.id){
+                    return{
+                        ...product,
+                        quantity:product.quantity - 1
+                    }
+                }
+                return product
+            })
+            localStorage.setItem('cart',JSON.stringify(cart))
+            return{
+                ...state,
+                cart
+            }
+        }
+        case 'increaseQuantity':{
+            const cart = state.cart.map(product=>{
+                if(product.id === actions.payload.id){
+                    return{
+                        ...product,
+                        quantity:product.quantity + 1
+                    }
+                }
+                return product
+            })
+            localStorage.setItem('cart',JSON.stringify(cart))
+
+            return{
+                ...state,
+                cart
+            }
+        }
+        
         default:
             return state
     }
 }
+// Hook personalizado para sincronizar el carrito con localStorage

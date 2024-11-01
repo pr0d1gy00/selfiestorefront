@@ -1,30 +1,33 @@
 import ProductsCSS from '../styles/products.module.css'
-import data from '../../../../public/priceDollar.json'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ArrowNext from '../../../assets/next.png'
 import ArrowBack from '../../../assets/back.png'
 
 type ProductSelectedProps={
+	id:string
 	title:string
 	ammount:string
 	description:string
 	price:string
-	images:{
-		Images:string
-	}[]
+	images:string[]
+	setIdAddToCart: Dispatch<SetStateAction<string>>
 }
 
-export default function ProductSelected({title,ammount,description,price,images}:ProductSelectedProps) {
+export default function ProductSelected({title,ammount,description,price,images,id,setIdAddToCart}:ProductSelectedProps) {
 	const image = images
 	const [selectedIndex, setSelectedIndex]=useState(0)
-	const [selectedImage,setSelectedImage]=useState(image[0].Images)
+	const [selectedImage, setSelectedImage] = useState<string>('');
 
-	let dollar = data.price
-	console.log(image)
-	const selectedNewImage = (index:number,images:{Images:string}[] ,next = true)=>{
+    useEffect(() => {
+        if (images.length > 0) {
+            setSelectedImage(images[0]);
+        }
+    }, [images]);
+	
+	const selectedNewImage = (index:number,images:string[] ,next = true)=>{
 			const condition = next ? selectedIndex < image.length -1 : selectedIndex > 0
 			const nextIndex = next ? condition ? selectedIndex + 1 : 0 : condition ? selectedIndex -1 : image.length-1
-			setSelectedImage(image[nextIndex].Images)
+			setSelectedImage(image[nextIndex])
 			setSelectedIndex(nextIndex)
 	}
 	const previous = ()=>{
@@ -33,7 +36,7 @@ export default function ProductSelected({title,ammount,description,price,images}
 	const next = ()=>{
 		selectedNewImage(selectedIndex, image)
 	}
-	console.log(selectedIndex)
+
 	return (
 		<section className={ProductsCSS.productSelectedContainer}>
 			<div className={ProductsCSS.imageProductSelectedContainer}>
@@ -56,7 +59,7 @@ export default function ProductSelected({title,ammount,description,price,images}
 				<p><strong>Cantidad disponible:</strong> {ammount}</p>
 				<p><strong>Precio: </strong>{price}$</p>
 				<p>{description}</p>
-				<button type='button'>Añadir al carrito</button>
+				<button type='button' onClick={()=>setIdAddToCart(id)}  >Añadir al carrito</button>
 			</div>
 		</section>
 	)

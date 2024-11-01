@@ -9,8 +9,8 @@ type TableHeadProps={
 export default function TableHead({data}:TableHeadProps) {
 	return (
 		<div className={TableCSS.tableHead}>
-			{data.map(name=>
-				<p>{name.name}</p>
+			{data.map((name,index)=>
+				<p key={index}>{name.name}</p>
 			)}
 		</div>
 	)

@@ -29,9 +29,7 @@ export type imageProducsInterfaces = {
 	image5:File | undefined
 }
 
-export type ImageProductSelected = {
-	Images:string
-}
+export type ImageProductSelected = string[]
 export type RegisterProductInterfacesEditInterfaces ={
 	Category_id: string,
 	Name_product: string,

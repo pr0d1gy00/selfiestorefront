@@ -1,12 +1,12 @@
+import { RegisterContext } from '../context/RegisterContext'
+import { ChangeEvent, Dispatch, FormEvent, useContext, useState } from 'react'
+import { registerActions } from '../../reducers/register-user'
 import Input from '../../ui/inputs/components/Input'
 import RegisterCSS from '../styles/register.module.css'
 import ButtonRegisterLogin from '../../ui/buttons/components/ButtonRegisterLogin'
 import Title from '../../ui/title/components/Title'
-import { ChangeEvent, Dispatch, FormEvent, useContext, useState } from 'react'
 import { RegisterUserInterface } from '../interfaces/RegisterInterfaces'
-import { registerActions } from '../../reducers/register-user'
 import Alert from '../../ui/alerts/components/Alert'
-import { RegisterContext } from '../context/RegisterContext'
 
 type RegisterFormProps ={
     dispatch:Dispatch<registerActions>
@@ -18,27 +18,27 @@ const initialState ={
     Name_user: '',
     Last_name: '',
     Phome_number: '',
-    Email: ''
+    Email: '',
+    Rol_id:'1'
 }
 
 export default function RegisterForm({dispatch,state}:RegisterFormProps) {
 	const context = useContext(RegisterContext)
-    const [register,setRegister]=useState<RegisterUserInterface>(initialState)
-    const [showAlert, setShowAlert]=useState(false)
-
     if (!context) {
         throw new Error('RegisterContext must be used within a RegisterProvider');
     }
-    
     const {success} = context;
+    const [register,setRegister]=useState<RegisterUserInterface>(initialState)
+    const [showAlert, setShowAlert]=useState(false)
+
+
     const handleChange = (e:ChangeEvent<HTMLInputElement>)=>{
         setRegister({
             ...register,
             [e.target.id]:e.target.value
         })
     }
-    console.log(register)
-
+console.log(register)
     const handleSubmit = (e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         dispatch({type:'registerUSer',payload:{user:register}})
@@ -46,9 +46,9 @@ export default function RegisterForm({dispatch,state}:RegisterFormProps) {
         setTimeout(()=>{
             setShowAlert(false)
         },3000)
-        // setRegister({
-        //     ...initialState
-        // })
+        setRegister({
+            ...initialState
+        })
     }
     return (
         <section className={RegisterCSS.containerRegister}>
@@ -60,9 +60,6 @@ export default function RegisterForm({dispatch,state}:RegisterFormProps) {
             
             <form action="POST" onSubmit={handleSubmit}>
                 <Title/>
-                {/* <div className={RegisterCSS.containerImage}>
-                    <img src={logo} alt="selfiestore" />
-                </div> */}
                 <h3>Registrate!</h3>
                 <div className={RegisterCSS.containerForm}>
                     <p>Nombre</p>
@@ -81,7 +78,7 @@ export default function RegisterForm({dispatch,state}:RegisterFormProps) {
                     />
                     <p>Cedula</p>
                     <Input
-                    id='Id'
+                        id='Id'
                         placeholder='1234567'
                         type='number'
                         onChange={handleChange}

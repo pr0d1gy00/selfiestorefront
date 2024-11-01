@@ -1,6 +1,6 @@
+import { RegisterContext} from "./RegisterContext";
 import { ReactNode, useReducer, useState } from "react";
 import { RegisterReducer, initialState } from "../../reducers/register-user";
-import { RegisterContext} from "./RegisterContext";
 
 type RegisterProviderProps = {
 	children:ReactNode

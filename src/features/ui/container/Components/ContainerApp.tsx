@@ -1,15 +1,26 @@
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom';
+import { Dispatch, useReducer, useState } from 'react'
+import { Outlet, useOutletContext } from 'react-router-dom';
 import Header from '../../header/components/Header'
 import Sidebar from '../../sidebar/components/Sidebar'
 import AppCSS from '../../../../globalStyles/app.module.css'
+import { initialState, RegisterActions, RegisterReducer, registerState, } from '../../../reducers/register-user';
+
+type ContextType = {
+	dispatch:Dispatch<RegisterActions>
+	state: registerState | undefined
+}
+
+
 export default function ContainerApp() {
 	const [showSidebar,setShowSidebar]=useState(true)
+	const [state,dispatch]=useReducer(RegisterReducer,initialState)
 	return (
 		<div>
 			<Header
 				setShowSidebar={setShowSidebar}
 				showSidebar={showSidebar}
+				state={state}
+				dispatch={dispatch}
 			/>
 			<div className={AppCSS.containerApp}>
 				<div className={AppCSS.containerAppSidebar}>
@@ -18,10 +29,14 @@ export default function ContainerApp() {
 					/>
 				</div>
 				<div className={AppCSS.containerAppContent}>
-					<Outlet/>
+					<Outlet  context={{ dispatch,state } satisfies ContextType} />
 					{/* <ModalUploadPay/> */}
 				</div>
 			</div>
 		</div>
 	)
 }
+export function useDispatch() {
+	return useOutletContext<ContextType>();
+}
+

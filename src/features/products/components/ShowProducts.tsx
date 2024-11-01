@@ -1,5 +1,4 @@
 import Card from "./Card";
-import data from '../../../../public/priceDollar.json'
 import ProductsCSS from '../styles/products.module.css'
 import Logo from '../../../assets/logo.webp'
 import { useContext, useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { GetProductsInterfaces} from "../interfaces/ProductsInterfaces";
 import { RegisterContext } from "../../register/context/RegisterContext";
 import Alert from "../../ui/alerts/components/Alert";
 import { useNavigate } from 'react-router-dom';
+
 export default function ShowProducts() {
     const context = useContext(RegisterContext)
     const [productsToShow,setProductsToShow]=useState<GetProductsInterfaces[] | null>(null)
@@ -21,7 +21,6 @@ export default function ShowProducts() {
     }
     const {setError,setMsj,msj,success,showAlert,setShowAlert} = context;
 
-    let dollar = data.price
 
     useEffect(()=>{
         GetProducts().then(response=>{
@@ -29,11 +28,11 @@ export default function ShowProducts() {
 		}).catch(error=>{
 			console.log(error)
 			setError(true)
-			setMsj('Error al mostrar las categorias')
+			setMsj('Error al mostrar los productos')
 			setShowAlert(true)
 			setTimeout(()=>{setShowAlert(false)},5000)
 		})
-    },[])
+    },[setError, setMsj, setShowAlert])
 
     return (
         <div className={ProductsCSS.container}>
