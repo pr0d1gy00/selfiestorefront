@@ -45,8 +45,8 @@ export type addToCartActions = { type:'addToCart', payload:{cart:CartItem}}
 export type increaseQuantity = {type: 'increaseQuantity', payload:{id:CartItem['id']}}
 export type decreaseQuantity = {type: 'decreaseQuantity', payload:{id:CartItem['id']}}
 export type clearCart =    { type: 'clear-cart' }
-
-export type RegisterActions = registerActions | RegisterCategoryAction | DeleteCategoryAction | RegisterProductAction | UploadImagesProducts | LoginUserAction | addToCartActions | increaseQuantity | decreaseQuantity | clearCart;
+export type removeProduct = {type:'removeProduct',payload:{id:CartItem['id']}}
+export type RegisterActions = registerActions | RegisterCategoryAction | DeleteCategoryAction | RegisterProductAction | UploadImagesProducts | LoginUserAction | addToCartActions | increaseQuantity | decreaseQuantity | clearCart | removeProduct;
 
 
 const localStorageCart = localStorage.getItem('cart')
@@ -250,7 +250,21 @@ export const RegisterReducer = (
                 cart
             }
         }
+        case 'removeProduct':{
+            const cart= state.cart.filter(product=>product.id !== actions.payload.id)
+            return{
+                ...state,
+                cart
+            }
+        }
         
+        case 'clear-cart':{
+            localStorage.removeItem('cart')
+            return{
+                ...state,
+                cart:[]
+            }
+        }
         default:
             return state
     }

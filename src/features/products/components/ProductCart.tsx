@@ -38,7 +38,11 @@ export default function ProductCart({image,nameProduct,price,quantity,dispatch,i
 					</button>
 				</div>
 			</div>
-			<button type='button'>
+			<button type='button'
+				onClick={()=>{
+					dispatch({type:'removeProduct',payload:{id:id}})
+				}}
+			>
 				<img src={DeleteProductIcon} alt="eliminar" />
 			</button>
 		</div>

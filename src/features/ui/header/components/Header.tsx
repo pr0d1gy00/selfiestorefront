@@ -84,6 +84,9 @@ export default function Header({showSidebar,setShowSidebar,dispatch,state}:Heade
                                 <p>Precio en Dolares: <strong>{price}$</strong></p>
                                 <p>Precio en Bolivares: <strong>{price ? price * parseInt(priceDollar) : 0 }Bs</strong></p>
                             </div>
+                            <button className={HeaderCSS.buttonClearCart} onClick={()=>{
+                                dispatch({type:'clear-cart'})
+                            }}>Limpiar carrito</button>
                             <ButtonRegisterLogin title={'Comprar'}/>
                         </div>
                     )

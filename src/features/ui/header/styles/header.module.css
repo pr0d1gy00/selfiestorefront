@@ -91,6 +91,18 @@
     height: auto;
     padding: 1rem;
 }
+.contentCart h2{
+    color: var(--border);
+    text-align: center;
+}
+.buttonClearCart{
+    width: 100%;
+    height: 5rem;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background-color: transparent;
+    color: var(--border);
+}
 .AmountTotal{
     margin-top: 1rem;
     color: var(--border);
