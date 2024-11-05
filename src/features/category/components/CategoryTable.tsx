@@ -9,6 +9,7 @@ import TableContent from '../../ui/table/components/TableContent'
 import CategoryCSS from '../styles/category.module.css'
 import OtherTitle from '../../ui/OtherTitle/components/OtherTitle'
 import { RegisterActions } from '../../reducers/register-user'
+import { useDispatch } from '../../ui/container/Components/ContainerApp'
 
 type CategoryFormProps={
 	dispatch: Dispatch<RegisterActions>
@@ -16,6 +17,7 @@ type CategoryFormProps={
 
 
 export default function CategoryTable({dispatch}:CategoryFormProps) {
+	const {state}=useDispatch()
 	const context = useContext(RegisterContext)
 	const [dataContent,setDataContent]=useState<GetCategoryInterfaces[]>([])
 
@@ -49,7 +51,7 @@ export default function CategoryTable({dispatch}:CategoryFormProps) {
 			: 
 				<Alert title={'Error'} isOk={false} content={msj}/> 
 			)}
-			<OtherTitle title={"Bienvenido Jose"} subtitle={"Mira todos los productos que tienes registrados!"}/>
+			<OtherTitle title={`Bienvenido ${state?.userLoggedIn.Name_user}`} subtitle={"Mira todos las categorias que tienes registradas!"}/>
 			<TableBody>
 				<TableHead data={data}/>
 				<TableContent

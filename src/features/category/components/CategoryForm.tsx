@@ -6,6 +6,8 @@ import { CategoryInterfaces } from '../interfaces/Category'
 import { RegisterActions } from '../../reducers/register-user'
 import { RegisterContext } from '../../register/context/RegisterContext'
 import Alert from '../../ui/alerts/components/Alert'
+import { useDispatch } from '../../ui/container/Components/ContainerApp'
+import OtherTitle from '../../ui/OtherTitle/components/OtherTitle'
 
 const initialState ={
 	name:''
@@ -16,6 +18,7 @@ type CategoryFormProps={
 }
 
 export default function CategoryForm({dispatch}:CategoryFormProps) {
+	const {state}=useDispatch()
 	const context = useContext(RegisterContext)
 	const [name, setName]=useState(initialState)
     const [showAlert, setShowAlert]=useState(false)
@@ -53,8 +56,7 @@ console.log(name)
                 :
                     <Alert title={'Error'} isOk={false} content={msj}/> 
             )}
-			<h2>Bienvenido José!</h2>
-			<h3>Registra la categoría aquí!</h3>
+			<OtherTitle title={`Bienvenido ${state?.userLoggedIn.Name_user}`} subtitle={"registra una categoria!"}/>
 			<div className={CategoryCSS.registerCategory}>
 				<form action="POST" onSubmit={handleSubmit}>
 					<p className={CategoryCSS.textRegisterCategory}>Nombre</p>

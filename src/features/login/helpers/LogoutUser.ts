@@ -1,5 +1,5 @@
-export async function LogoutUser({id,password}:{id:string,password:string}){
-	const response = await fetch('http://localhost/selfistore/public/auth/logout',{
+export async function LogoutUser({id,logged_id}:{id:string,logged_id:boolean}){
+	const response = await fetch('http://localhost/selfistore/public/logout',{
 		method:'POST',
 		mode:'cors',
 		credentials:'same-origin',
@@ -8,7 +8,7 @@ export async function LogoutUser({id,password}:{id:string,password:string}){
 		},
 		body:JSON.stringify({
 			Id:id,
-			Password:password
+			logged_id:logged_id
 		})
 	})
 	return response

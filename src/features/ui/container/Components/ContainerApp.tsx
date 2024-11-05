@@ -15,7 +15,7 @@ type ContextType = {
 export default function ContainerApp() {
 	const [showSidebar,setShowSidebar]=useState(true)
 	const [state,dispatch]=useReducer(RegisterReducer,initialState)
-	console.log(typeof(state?.userLoggedIn))
+	console.log(state?.userLoggedIn)
 
 	useEffect(()=>{
 		CompareLocalStorage(state).catch(error=>{

@@ -16,6 +16,7 @@ import {
 	SendBuy,
 } from "../ui/header/interfaces/HeaderInterfaces";
 import { Buy } from "../ui/header/helpers/Buy";
+import { LogoutUser } from "../login/helpers/LogoutUser";
 
 export type registerActions = {
 	type: "registerUSer";
@@ -264,7 +265,11 @@ export const RegisterReducer = (
 			break;
 		}
         case "logoutUser":{
-            
+			LogoutUser({id:state.userLoggedIn.Id,logged_id:state.userLoggedIn.logged_id}).then(response=>{
+				if(response.ok){
+					sessionStorage.removeItem('login')
+				}
+			}).catch(error=>console.log(error))
             break
         }
 		case "addToCart": {
