@@ -6,7 +6,7 @@ import { registerState } from '../../../reducers/register-user';
 
 type SidebarProps ={
     showSidebar:boolean
-    state:registerState
+    state:registerState | undefined
 }
 
 export default function Sidebar({showSidebar,state}:SidebarProps) {

@@ -7,7 +7,6 @@ import UploadImagesIcon from '../../../../assets/subir-imagenes.png'
 import ProductsListIcon from '../../../../assets/lista-productos.png'
 import RegisterProductsAndCategoriesIcon from '../../../../assets/anadir.png'
 import CategoriesListIcon from '../../../../assets/categorias.png'
-import { loginProps } from "../../../login/helpers/LoginUser";
 import { registerState } from "../../../reducers/register-user";
 const products : SidebarItemData ={
     content: "Productos",
@@ -59,7 +58,7 @@ const RegisterUserForm : SidebarItemData = {
     path: "user/register"
 }
 
-export const useSidebarData = (state:registerState)=>{
+export const useSidebarData = (state:registerState | undefined)=>{
     const [sidebarData,setSidebarData]=useState<SidebarItemData[]>([
 
     ])
