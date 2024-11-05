@@ -102,7 +102,7 @@ export default function Header({
 		}
 	}, [showFinishBuy, success]);
 	useEffect(() => {
-		if (!state?.userLoggedIn) return;
+		if (!state?.userLoggedIn) return setLoginSession(loginInitialState);
 
 		setLoginSession(state?.userLoggedIn);
 

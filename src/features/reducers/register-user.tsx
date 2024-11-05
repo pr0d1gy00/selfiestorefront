@@ -256,6 +256,8 @@ export const RegisterReducer = (
 						JSON.stringify(response)
 					);
 					state.userLoggedIn = response;
+					window.location.assign('/')
+
 				})
 				.catch((error) => {
 					console.log(error);
@@ -268,6 +270,7 @@ export const RegisterReducer = (
 			LogoutUser({id:state.userLoggedIn.Id,logged_id:state.userLoggedIn.logged_id}).then(response=>{
 				if(response.ok){
 					sessionStorage.removeItem('login')
+					window.location.reload()
 				}
 			}).catch(error=>console.log(error))
             break
