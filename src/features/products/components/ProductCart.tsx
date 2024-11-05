@@ -19,10 +19,10 @@ export default function ProductCart({image,nameProduct,price,quantity,dispatch,i
 			<div className={ProductsCSS.infoProductCart}>
 				<div >
 					<p className={ProductsCSS.nameProduct}>{nameProduct}</p>
-					<p><strong>Precio:</strong>{price}$</p>
+					<p><strong>Precio:</strong>{parseFloat(price) * quantity}$</p>
 				</div>
 				<div className={ProductsCSS.buttonsQuantity}>
-					<button onClick={()=>{
+					<button title='increaseQuantity' onClick={()=>{
 						dispatch({type:'decreaseQuantity',payload:{id:id}
 						})
 					}}>
@@ -30,7 +30,7 @@ export default function ProductCart({image,nameProduct,price,quantity,dispatch,i
 					</button>
 						<p>{quantity}</p>
 
-					<button onClick={()=>{
+					<button title='increaseQuantity' onClick={()=>{
 						dispatch({type:'increaseQuantity',payload:{id:id}
 						})
 					}}>

@@ -192,8 +192,13 @@
     background-color: white;
 }
 .infoProductSelectedContainer p{
+    font-size: 1.7rem;
     margin-bottom: 1rem;
     color: var(--backgroudCardRegister);
+}
+.infoProductSelectedDescription{
+    margin-top: 2rem;
+    border-bottom: 1px solid var(--backgroudCardRegister);
 }
 .infoProductSelectedContainer button{
     height: 5rem;
@@ -246,11 +251,12 @@
 }
 .relatedProductCard{
     width: 20rem;
-    height: 25rem;
+    height: 32rem;
     border-radius: 1rem;
     background-color: var(--backgroudCardRegister);
 }
 .relatedProductCard p{
+    padding: 0.5rem;
     height: 5rem;
     overflow: hidden;
     padding: 1rem;
@@ -259,6 +265,8 @@
 .relatedProductCard img{
     border-radius: 1rem 1rem 0 0;
     width: 20rem;
+    height: 25rem;
+    object-fit: cover;
 }
 /********* ESTILOS PARA EL PRODUCTO DEL CARRITO *********/
 .productCart{
@@ -359,6 +367,9 @@
     .infoProductSelectedContainer{
         width: 50%;
         width: 60rem;
+    }
+    .infoProductSelectedContainer button:disabled{
+        opacity: .80;
     }
 }
 @media (width > 800px) { 

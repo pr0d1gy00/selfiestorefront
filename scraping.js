@@ -4,9 +4,9 @@ import fs from "fs";
 async function getDollarPrice() {
 	let browser;
     try {
-        browser = await firefox.launch({ headless: true });
+        browser = await chromium.launch({ headless: false });
         const page = await browser.newPage();
-        await page.goto("https://www.bcv.org.ve/", { timeout: 60000, waitUntil:'load'});
+        await page.goto("https://www.bcv.org.ve/", { timeout: 120000,waitUntil:'load'});
 
         const priceDollar = await page.$$eval(
             "#dolar * strong",
@@ -31,7 +31,7 @@ async function getDollarPrice() {
         }
     }
 }
-getDollarPrice();
-setInterval(getDollarPrice, 60000);
+// getDollarPrice();
+// setInterval(getDollarPrice, 60000);
 
 

@@ -5,11 +5,9 @@
 }
 
 .tableHead{
-	background-color: var(--backgroudCardRegister);
 	height: auto;
 	min-width: 24rem;
-	width: 100%;
-	max-width: 100rem;
+	width: auto;
 	display: flex;
 	justify-content: space-between;
 }
@@ -17,41 +15,47 @@
 	min-width: 12rem;
 	max-width: 12rem;
 	padding: 1.5rem;
+	color: var(--backgroudCardRegister);
+	border-bottom: 2px solid var(--backgroudCardRegister);
+	font-weight: bold;
 }
 .content{
 	min-width: 24rem;
-	max-width: 100rem;
 	background-color: #ffffff;
 	height: auto;
 	width: 100%;
 	display: flex;
 }
 .content p{
+	font-weight: 500;
 	min-width: 12rem;
 	max-width: 12rem;
 	height: auto;
 	padding: 1.5rem;
 	overflow: hidden;
 	color: var(--backgroudCardRegister);
+	background-color: white;
 }
 
-.tableBody{
-	margin-top: 2rem;
-	min-width: 24rem;
-	max-width: 35rem;	
-	height: auto;
-	overflow-x: scroll;
-	border: 2px solid var(--backgroudCardRegister);
-	border-radius: 2rem;
+.tableBody {
+    margin-top: 2rem;
+    min-width: 24rem;
+    max-width: 35rem;
+    height: auto;
+    overflow-x: auto;
+    border: 2px solid var(--backgroudCardRegister);
+    border-radius: 2rem;
+    background-color: white; /* Asegúrate de que el fondo esté definido */
 }
 .buttonAction{
 	display: flex;
 	justify-content:center ;
 	align-items: center;
-	width: 5rem;
+	width:5rem;
 	background-color: transparent;
 	margin-right: 1rem;
 	border: none;
+	background-color: white;
 }
 .buttonAction img{
 	width: 3rem;

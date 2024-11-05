@@ -49,12 +49,15 @@ export default function CategoryTable({dispatch}:CategoryFormProps) {
 			: 
 				<Alert title={'Error'} isOk={false} content={msj}/> 
 			)}
+			<OtherTitle title={"Bienvenido Jose"} subtitle={"Mira todos los productos que tienes registrados!"}/>
 			<TableBody>
 				<TableHead data={data}/>
 				<TableContent
 					showActions={true}
 					dataContent={dataContent}
-					dispatch={dispatch} showEdit={true} showDelete={true}/>
+					dispatch={dispatch} 
+					showEdit={true} 
+					showDelete={false}/>
 			</TableBody>
 		</div>
 	)

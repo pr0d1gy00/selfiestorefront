@@ -9,24 +9,27 @@ import Alert from "../../ui/alerts/components/Alert";
 import { GetProducts } from "../helpers/GetProducts";
 import { RegisterActions } from "../../reducers/register-user";
 import ProductsCSS from '../styles/products.module.css'
+import { useDispatch } from "../../ui/container/Components/ContainerApp";
 
 type ShowProductsTableProps={
 	dispatch: Dispatch<RegisterActions>
 }
 
 export default function ShowProductsTable({dispatch}:ShowProductsTableProps) {
+	const {state}=useDispatch()
 	const context = useContext(RegisterContext)
-	const [dataContent,setDataContent]=useState<GetProductsInterfaces[]>([])
-
+	const [dataContent, setDataContent] = useState<Omit<GetProductsInterfaces, 'Image'>[]>([]);
 	if (!context) {
         throw new Error('RegisterContext must be used within a RegisterProvider');
     }
     const {setError,setMsj,msj,success,showAlert,setShowAlert} = context;
-	const dataHeader =[{name:'Id'},{name:'Categoria'},{name:'Nombre'},{name:'Descripcion'},{name:'Estado'},{name:'Imagen'},{name:'Precio'},{name:'Acciones'}]
+	const dataHeader =[{name:'Id'},{name:'Categoria'},{name:'Nombre'},{name:'Descripcion'},{name:'Estado'},{name:'Precio'}, {name:'Inventario'},{name:'Acciones'}]
 	
 	useEffect(()=>{
 		GetProducts().then(response =>{
-			setDataContent(response)
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const filteredData = response.map(({ Image, ...rest }) => rest);
+			setDataContent(filteredData)
 		}).catch(error=>{
 			console.log(error)
 			setError(true)
@@ -42,7 +45,7 @@ export default function ShowProductsTable({dispatch}:ShowProductsTableProps) {
 			: 
 				<Alert title={'Error'} isOk={false} content={msj}/> 
 			)}
-			<OtherTitle title={"Bienvenido Jose"} subtitle={"Mira todos los productos que tienes registrados!"}/>
+			<OtherTitle title={`Bienvenido ${state?.userLoggedIn.Name_user}`} subtitle={"Mira todos los productos que tienes registrados!"}/>
 			<TableBody>
 				<TableHead data={dataHeader}/>
 				<TableContent dataContent={dataContent} dispatch={dispatch} showActions={true} showEdit={true} showDelete={false}/>

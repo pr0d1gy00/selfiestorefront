@@ -43,11 +43,12 @@ export default function LoginForm({state,dispatch}:LoginUserProps) {
             setShowAlert(false)
             
         }, 2000)
-        // setTimeout(()=>{
-        //     if (success) {
-        //         navigate('/')
-        //     }
-        // },1000)
+        setTimeout(()=>{
+
+            navigate('/')
+        },1000)
+        
+        
     }
     return (
         <section className={LoginCSS.loginContainer}>

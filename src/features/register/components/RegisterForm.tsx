@@ -7,6 +7,7 @@ import ButtonRegisterLogin from '../../ui/buttons/components/ButtonRegisterLogin
 import Title from '../../ui/title/components/Title'
 import { RegisterUserInterface } from '../interfaces/RegisterInterfaces'
 import Alert from '../../ui/alerts/components/Alert'
+import { useNavigate } from 'react-router-dom'
 
 type RegisterFormProps ={
     dispatch:Dispatch<registerActions>
@@ -22,12 +23,13 @@ const initialState ={
     Rol_id:'1'
 }
 
-export default function RegisterForm({dispatch,state}:RegisterFormProps) {
+export default function RegisterForm({dispatch}:RegisterFormProps) {
 	const context = useContext(RegisterContext)
     if (!context) {
         throw new Error('RegisterContext must be used within a RegisterProvider');
     }
     const {success} = context;
+    const navigate = useNavigate()
     const [register,setRegister]=useState<RegisterUserInterface>(initialState)
     const [showAlert, setShowAlert]=useState(false)
 
@@ -46,6 +48,9 @@ console.log(register)
         setTimeout(()=>{
             setShowAlert(false)
         },3000)
+        if(success){
+            navigate('user/login/auth')
+        }
         setRegister({
             ...initialState
         })

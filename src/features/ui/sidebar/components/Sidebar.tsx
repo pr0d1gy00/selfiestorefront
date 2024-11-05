@@ -2,13 +2,15 @@ import SidebarCSS from '../styles/sidebar.module.css'
 import { useSidebarData } from '../hooks/useSidebarData'
 import SidebarHeader from './SidebarHeader';
 import Item from './Item';
+import { registerState } from '../../../reducers/register-user';
 
 type SidebarProps ={
     showSidebar:boolean
+    state:registerState
 }
 
-export default function Sidebar({showSidebar}:SidebarProps) {
-    const sidebarData = useSidebarData();
+export default function Sidebar({showSidebar,state}:SidebarProps) {
+    const sidebarData = useSidebarData(state);
     return (
         <>
             {showSidebar ?

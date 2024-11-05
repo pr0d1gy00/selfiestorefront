@@ -7,6 +7,8 @@ import UploadImagesIcon from '../../../../assets/subir-imagenes.png'
 import ProductsListIcon from '../../../../assets/lista-productos.png'
 import RegisterProductsAndCategoriesIcon from '../../../../assets/anadir.png'
 import CategoriesListIcon from '../../../../assets/categorias.png'
+import { loginProps } from "../../../login/helpers/LoginUser";
+import { registerState } from "../../../reducers/register-user";
 const products : SidebarItemData ={
     content: "Productos",
     iconPath:ProductsIcon ,
@@ -57,24 +59,23 @@ const RegisterUserForm : SidebarItemData = {
     path: "user/register"
 }
 
-export const useSidebarData = ()=>{
+export const useSidebarData = (state:registerState)=>{
     const [sidebarData,setSidebarData]=useState<SidebarItemData[]>([
 
     ])
 
     useEffect(()=>{
-        setSidebarData(()=>[
-            products,
-            buy,
-            registerProductForm,
-            showProductsRegistered,
-            RegisterCategoryForm,
-            ShowCategoriesTable,
-            UploadImagesProductsForm,
-            RegisterUserForm
-            
-        ])
-
+        if(!state)return
+        
+        // if(state.userLoggedIn.Rol_id=== '2')
+        //     return setSidebarData(()=>[
+        //         products,
+        //         buy              
+        //     ])
+        // if(!state.userLoggedIn)
+        //     return setSidebarData(()=>[
+        //         products
+        // ])
         return setSidebarData(()=>[
             products,
             buy,
@@ -88,7 +89,7 @@ export const useSidebarData = ()=>{
             ]
         )
 
-    },[])
+    },[state])
 
     return sidebarData
 }

@@ -58,8 +58,14 @@ export default function ProductSelected({title,ammount,description,price,images,
 				<h2>{title}</h2>
 				<p><strong>Cantidad disponible:</strong> {ammount}</p>
 				<p><strong>Precio: </strong>{price}$</p>
+				<p className={ProductsCSS.infoProductSelectedDescription}><strong>Descripción del producto:</strong></p>
 				<p>{description}</p>
-				<button type='button' onClick={()=>setIdAddToCart(id)}  >Añadir al carrito</button>
+				{parseInt(ammount) > 0 ?
+					<button type='button' onClick={()=>setIdAddToCart(id)}>Añadir al carrito</button>
+
+					:
+					<button type='button' disabled  >Agotado</button>
+				}
 			</div>
 		</section>
 	)

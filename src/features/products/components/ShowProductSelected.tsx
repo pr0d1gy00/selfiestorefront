@@ -26,10 +26,7 @@ export default function ShowProductSelected() {
 	const [relatedProducts,setRelatedProducts]=useState<GetProductsInterfaces[] | null>(null)
 	const [idAddToCart,setIdAddToCart]=useState('')
 	const {id}=useParams()
-	//guardando stata del carrito en el localstorage
-	console.log(state
-		,dispatch
-	)
+
 	useEffect(()=>{
 		if(!id)return
 		GetProductSelected(parseInt(id)).then(response=>{
@@ -41,9 +38,10 @@ export default function ShowProductSelected() {
 		})
 	},[id])
 	//OPTIMIZAR CON EVENTO EN EL BOTON
+	console.log(state?.cart);
+
 	useEffect(() => {
 		if (!idAddToCart) return;
-		console.log("a;adiendo al carrito el id", idAddToCart);
 		dispatch({
 			type: "addToCart",
 			payload: {
@@ -97,7 +95,7 @@ export default function ShowProductSelected() {
 					) : (
 						relatedProducts.map((relatedProducts) => (
 							<RelatedProducts
-								image={`http://localhost/selfistore/public/ImageProducts/pantalon.jpg`}
+								image={relatedProducts.Image ? relatedProducts.Image : ''}
 								nameProduct={
 									relatedProducts.Name_product
 								}
