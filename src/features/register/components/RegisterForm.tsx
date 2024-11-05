@@ -32,15 +32,14 @@ export default function RegisterForm({dispatch}:RegisterFormProps) {
     const navigate = useNavigate()
     const [register,setRegister]=useState<RegisterUserInterface>(initialState)
     const [showAlert, setShowAlert]=useState(false)
-
-
+    const disableButton = !register.Id || register.Id.length < 7 || register.Id.length > 8 || register.Phome_number.length < 10 || !register.Last_name || !register.Name_user || !register.Password || register.Password.length < 5 || !register.Phome_number || !register.Rol_id
+    
     const handleChange = (e:ChangeEvent<HTMLInputElement>)=>{
         setRegister({
             ...register,
             [e.target.id]:e.target.value
         })
     }
-console.log(register)
     const handleSubmit = (e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         dispatch({type:'registerUSer',payload:{user:register}})
@@ -112,6 +111,7 @@ console.log(register)
                     <ButtonRegisterLogin 
                         type='submit'
                         title={'Registrarme'}
+                        disabled={disableButton}
                         
                     />
                 </div>

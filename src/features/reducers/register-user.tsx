@@ -247,9 +247,9 @@ export const RegisterReducer = (
 				password: actions.payload.password,
 			})
 				.then((response) => {
+					setSuccess(true);
 					console.log(response);
 					setError(false);
-					setSuccess(true);
 					sessionStorage.setItem(
 						"login",
 						JSON.stringify(response)

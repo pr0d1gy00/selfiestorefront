@@ -38,15 +38,15 @@ export default function LoginForm({state,dispatch}:LoginUserProps) {
         console.log(dispatch)
         dispatch({type:'loginUser',payload:{id:infoLogin.id,password:infoLogin.password}})
         setTimeout(()=>setShowAlert(true)
-        ,500)
+        ,800)
         setTimeout(() => {
             setShowAlert(false)
             
-        }, 2000)
+        }, 3000)
         setTimeout(()=>{
 
             navigate('/')
-        },1000)
+        },1500)
         
         
     }

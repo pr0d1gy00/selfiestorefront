@@ -38,6 +38,7 @@ export default function ShowProductsTable({dispatch}:ShowProductsTableProps) {
 			setTimeout(()=>{setShowAlert(false)},5000)
 		})
 	},[])
+	console.log(dataContent)
 	return (
 		<div className={ProductsCSS.productsTable}>
 			{showAlert && (success ?

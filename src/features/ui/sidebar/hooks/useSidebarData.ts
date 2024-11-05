@@ -73,7 +73,8 @@ export const useSidebarData = (state:registerState | undefined)=>{
         //     ])
         // if(!state.userLoggedIn)
         //     return setSidebarData(()=>[
-        //         products
+        //         products,
+        //        RegisterUserForm
         // ])
         return setSidebarData(()=>[
             products,
