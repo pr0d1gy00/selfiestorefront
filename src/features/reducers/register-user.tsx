@@ -1,10 +1,11 @@
 import { CreateCategory } from "../category/helpers/CreateCategory";
 import { DeleteCategory } from "../category/helpers/DeleteCategory";
-import { CategoryInterfaces } from "../category/interfaces/Category";
+import { CategoryInterfaces, GetCategoryInterfaces } from "../category/interfaces/Category";
 import { useRegister } from "../register/context/useRegister";
 import { CreateUser } from "../register/helpers/CreateUser";
 import { RegisterUserInterface } from "../register/interfaces/RegisterInterfaces";
 import {
+	GetProductsInterfaces,
 	RegisterProductInterfaces,
 	UploadImagesProductsInterfaces,
 } from "../products/interfaces/ProductsInterfaces";
@@ -17,6 +18,8 @@ import {
 } from "../ui/header/interfaces/HeaderInterfaces";
 import { Buy } from "../ui/header/helpers/Buy";
 import { LogoutUser } from "../login/helpers/LogoutUser";
+import { UpdateProduct } from "../products/helpers/UpdateProduct";
+import { UpdateCategory } from "../category/helpers/EditCategory";
 
 export type registerActions = {
 	type: "registerUSer";
@@ -27,6 +30,10 @@ export type RegisterCategoryAction = {
 	type: "registerCategory";
 	payload: { category: CategoryInterfaces };
 };
+export type EditCategoryAction={
+	type:"editCategory",
+	payload:{category:GetCategoryInterfaces}
+}
 export type LoginUserAction = {
 	type: "loginUser";
 	payload: { id: string; password: string };
@@ -43,6 +50,10 @@ export type RegisterProductAction = {
 	type: "registerProduct";
 	payload: { product: RegisterProductInterfaces };
 };
+export type EditProductAction ={
+	type : "editProduct";
+	payload:{product:GetProductsInterfaces}
+}
 export type UploadImagesProducts = {
 	type: "uploadProduct";
 	payload: { uploadImages: UploadImagesProductsInterfaces };
@@ -92,7 +103,9 @@ export type RegisterActions =
 	| clearCart
 	| removeProduct
 	| sendBuyCart
-	| logoutUser;
+	| logoutUser
+	| EditProductAction
+	| EditCategoryAction
 
 export type sendBuyCart = {
 	type: "sendBuyCart";
@@ -189,6 +202,20 @@ export const RegisterReducer = (
 				});
 			break;
 		}
+		case "editCategory":{
+			UpdateCategory(actions.payload.category).then((response) => {
+				console.log(response);
+				setMsj(response.statusText);
+				setSuccess(true);
+				setError(false);
+			})
+			.catch((error) => {
+				console.log(error);
+				setError(true);
+				setSuccess(false);
+			});
+			break;
+		}
 		case "deleteCategory": {
 			DeleteCategory(parseInt(actions.payload.id))
 				.then((response) => {
@@ -225,6 +252,20 @@ export const RegisterReducer = (
 					setError(true);
 					setSuccess(false);
 				});
+			break;
+		}
+		case 'editProduct':{
+			UpdateProduct(actions.payload.product).then((response) => {
+				console.log(response);
+				setMsj(response.statusText);
+				setSuccess(true);
+				setError(false);
+			})
+			.catch((error) => {
+				console.log(error);
+				setError(true);
+				setSuccess(false);
+			});
 			break;
 		}
 		case "uploadProduct": {
@@ -267,7 +308,7 @@ export const RegisterReducer = (
 			break;
 		}
         case "logoutUser":{
-			LogoutUser({id:state.userLoggedIn.Id,logged_id:state.userLoggedIn.logged_id}).then(response=>{
+			LogoutUser({id:state.userLoggedIn.Id,logged_id:state.userLoggedIn.logged_id,name_user:state.userLoggedIn.Name_user}).then(response=>{
 				if(response.ok){
 					sessionStorage.removeItem('login')
 					window.location.reload()

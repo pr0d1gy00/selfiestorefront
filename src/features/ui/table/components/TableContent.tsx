@@ -3,6 +3,7 @@ import TableCSS from '../styles/table.module.css'
 import EditIcon from '../../../../assets/MaterialSymbolsEdit.svg'
 import DeleteIcon from '../../../../assets/materialsymbolsdelete.svg'
 import { RegisterActions } from '../../../reducers/register-user';
+import { useNavigate } from 'react-router-dom';
 interface TableContentProps{
 	dataContent: Array<Record<string, string>>;
 	dispatch?: Dispatch<RegisterActions>
@@ -13,6 +14,10 @@ interface TableContentProps{
 
 
 const TableContent:FC<TableContentProps>=({dataContent,dispatch,showActions,showDelete,showEdit}) =>{
+	const urlToEdit = window.location.pathname
+	const navigate = useNavigate()
+	const newUrl = urlToEdit.replace('/showList','/edit')
+
 	return (
 		<div>
 			{dataContent === null || dataContent.length === 0 ?
@@ -26,7 +31,18 @@ const TableContent:FC<TableContentProps>=({dataContent,dispatch,showActions,show
 				{showActions ?
 					<>
 						{showEdit ? 
-							<button className={TableCSS.buttonAction}>
+							<button className={TableCSS.buttonAction}
+								onClick={()=>{
+									if(newUrl.includes('product')){
+
+										navigate(`${newUrl}/${item['IdProduct']}`)
+									}
+									if(newUrl.includes('category')){
+
+										navigate(`${newUrl}/${item['IdCategory']}`)
+									}
+								}}
+							>
 								<img src={EditIcon} alt="editar" />
 							</button> 
 						:

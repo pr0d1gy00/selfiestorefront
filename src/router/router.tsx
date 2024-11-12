@@ -21,14 +21,21 @@ export const router = createBrowserRouter([
 				element:<ShowProductSelected/>
 			},
 			{path:'product/register',
-				element:<RegisterProductFormPage/>
+				element:<RegisterProductFormPage/>,
+				children:[
+					
+				]
 			},
 			{path:'product/showList',
-				element:<ShowProductsTablePage/>
+				element:<ShowProductsTablePage/>,
+
+				
 			},
 			{
 				path:'category/register',
-				element:<RegisterCategoryFormPage/>
+				element:<RegisterCategoryFormPage/>,
+				
+				
 			},
 			{
 				path:'products/upload/images',
@@ -41,7 +48,16 @@ export const router = createBrowserRouter([
 			{
 				path:'category/showList',
 				element:<ShowCategoriesTablePage/>
+							},
+							
+			{path:'category/edit/:id',
+				element:<RegisterCategoryFormPage/>
 			},
+			{path:'product/edit/:id',
+				element:<RegisterProductFormPage/>,
+
+				
+			},				
 			{
 				path:'user/login/auth',
 				element:<LoginFormPage/>

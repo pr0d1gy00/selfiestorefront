@@ -3,12 +3,14 @@ import ButtonRegisterLogin from "../../ui/buttons/components/ButtonRegisterLogin
 import Input from "../../ui/inputs/components/Input";
 import ProductsCSS from '../styles/products.module.css'
 import { RegisterActions } from "../../reducers/register-user";
-import { RegisterProductInterfaces } from "../interfaces/ProductsInterfaces";
+import { GetProductsInterfaces, RegisterProductInterfaces } from "../interfaces/ProductsInterfaces";
 import { GetCategories } from "../../category/helpers/GetCategories";
 import { GetCategoryInterfaces } from "../../category/interfaces/Category";
 import { RegisterContext } from "../../register/context/RegisterContext";
 import Alert from "../../ui/alerts/components/Alert";
 import OtherTitle from "../../ui/OtherTitle/components/OtherTitle";
+import { useNavigate, useParams } from "react-router-dom";
+import { GetProductsById } from "../helpers/GetProductById";
 
 type RegisterProductsProps={
 	state:RegisterProductInterfaces | undefined
@@ -29,11 +31,14 @@ export default function RegisterProducts({dispatch}:RegisterProductsProps) {
 	const [categories, setCategories]=useState<GetCategoryInterfaces[] | null>(null)
 	const [product,setProduct]=useState<RegisterProductInterfaces>(initialState)
     const [showAlert, setShowAlert]=useState(false)
+	const [productEdit, setProductEdit]=useState<GetProductsInterfaces>()
+	const navigate = useNavigate()
 	if (!context) {
         throw new Error('RegisterContext must be used within a RegisterProvider');
     }
-    
-    const {success,msj} = context;
+    const {id}=useParams()
+
+	const {success,msj} = context;
 	const handleChange = (e:ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
 		setProduct({
 			...product,
@@ -42,20 +47,49 @@ export default function RegisterProducts({dispatch}:RegisterProductsProps) {
 	}
 	const handleSubmit=(e:FormEvent<HTMLFormElement>)=>{
 		e.preventDefault()
-		dispatch({type:'registerProduct',payload:{product:product}})
-		setTimeout(()=>setShowAlert(true),500)
-        setTimeout(()=>{
-            setShowAlert(false)
-        },4000)
-		if(success){
-			setProduct({
-				...initialState
-			})
+		if(!id){
+			dispatch({type:'registerProduct',payload:{product:product}})
+			setTimeout(()=>setShowAlert(true),500)
+			setTimeout(()=>{
+				setShowAlert(false)
+			},4000)
+			if(success){
+				setProduct({
+					...initialState
+				})
+			}
+			setProduct(initialState)
+		}else{		
+			if(!productEdit?.IdProduct)return
+
+			const productSend = {
+				IdProduct:productEdit.IdProduct,
+				Category_id: product.Category_id,
+				Name_product: product.Name_product,
+				Description: product.Description ,
+				Image:product.Image,
+				Status: product.Status,
+				Price:product.Price,
+				Amount_inventory:product.Amount_inventory
+			}
+			dispatch({type:'editProduct',payload:{product:productSend}})
+			
+			if(success){
+				setTimeout(()=>setShowAlert(true),200)
+				setTimeout(()=>{
+					navigate('../product/showList')
+					setShowAlert(false)
+				},3000)
+				setProduct({
+					...initialState
+				})
+			}
+			setProduct(initialState)
 		}
-		setProduct(initialState)
 		
 	}
 	const disableButton = product.Price === '0' || product.Amount_inventory === '0' || product.Name_product.length < 3 || product.Description.length < 3;
+
 	useEffect(()=>{
 		GetCategories().then(response=>{
 			setCategories(response)
@@ -63,6 +97,15 @@ export default function RegisterProducts({dispatch}:RegisterProductsProps) {
 			console.log(error)
 		})
 	},[])
+
+	useEffect(()=>{
+		if(!id)return
+		GetProductsById(id).then(response =>{ setProduct(response[0])
+			setProductEdit(response[0])
+		})
+	},[])
+	console.log(product)
+
 	return (
 		<section className={ProductsCSS.containerRegisterProducts}>
 			<OtherTitle
@@ -161,7 +204,7 @@ export default function RegisterProducts({dispatch}:RegisterProductsProps) {
 					/>
 					<ButtonRegisterLogin
 						disabled={disableButton}
-						title={"Registrar"}
+						title={!id ? "Registrar" : "Editar"}
 					/>
 				</form>
 			</div>

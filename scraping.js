@@ -4,11 +4,15 @@ import fs from "fs";
 async function getDollarPrice() {
 	let browser;
     try {
-        browser = await firefox.launch({ headless: true
-
+        browser = await firefox.launch({ 
+            headless: true,
+            args: ['--ignore-certificate-errors'] // Ignorar errores de certificado
         });
-        const page = await browser.newPage();
-        await page.goto("https://www.bcv.org.ve/", { timeout: 120000,waitUntil:'domcontentloaded'});
+        const context = await browser.newContext({
+            ignoreHTTPSErrors: true // Ignorar errores HTTPS
+        });
+        const page = await context.newPage();
+        await page.goto("https://www.bcv.org.ve/", { timeout: 120000});
 
         const priceDollar = await page.$$eval(
             "#dolar * strong",
