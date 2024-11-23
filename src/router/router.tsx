@@ -10,6 +10,7 @@ import RegisterUserFormPage from "../Pages/RegisterUserFormPage";
 import ShowCategoriesTablePage from "../Pages/ShowCategoriesTablePage";
 import LoginForm from "../features/login/components/LoginForm";
 import LoginFormPage from "../Pages/LoginFormPage";
+import YourPurchasePage from "../Pages/YourPurchasePage";
 
 export const router = createBrowserRouter([
 
@@ -55,12 +56,14 @@ export const router = createBrowserRouter([
 			},
 			{path:'product/edit/:id',
 				element:<RegisterProductFormPage/>,
-
-				
 			},				
 			{
 				path:'user/login/auth',
 				element:<LoginFormPage/>
+			},
+			{
+				path:'yourPurchase',
+				element:<YourPurchasePage/>
 			}
 		]
 	}

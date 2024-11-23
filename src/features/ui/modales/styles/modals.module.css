@@ -71,6 +71,25 @@
 	width: 7rem;
 	border-radius: 1rem 0 0 1rem;
 }
+.modalUploadPay .modalHeader{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 5rem;
+}
+.modalHeader button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 5rem;
+	background-color: transparent;
+	border: none;
+}
+.modalHeader button img{
+	width: 1.5rem;
+	height: 1.5rem;
+	object-fit: cover;
+}
 @media (width>800px) { 
 	.modalAddCartContainer{
 		left: 40%;

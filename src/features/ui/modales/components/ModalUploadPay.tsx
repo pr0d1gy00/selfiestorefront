@@ -1,8 +1,14 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ModalsCSS from '../styles/modals.module.css'
 import ButtonRegisterLogin from '../../buttons/components/ButtonRegisterLogin'
 import Tesseract from 'tesseract.js'
-export default function ModalUploadPay() {
+import CloseIcon from '../../../../assets/x.png'
+
+type ModalUploadPayProps={
+	setShowModalVerifyPay: Dispatch<SetStateAction<boolean>>
+}
+
+export default function ModalUploadPay({setShowModalVerifyPay}:ModalUploadPayProps) {
 	const [imagePay, setImagePay]=useState<File | undefined>(undefined)
 	const [words, setWords]=useState<string[]>([])
 	const [validating,setValidating]=useState(true)
@@ -63,8 +69,17 @@ export default function ModalUploadPay() {
 	return (
 		<div className={ModalsCSS.modalUploadPayContainer}>
 			<div className={ModalsCSS.modalUploadPay}>
+				<div className={ModalsCSS.modalHeader}>
+						<h3>Sube tu pago aqui</h3>
+						<button 
+							onClick={()=>{
+								setShowModalVerifyPay(false)
+							}}
+						type='button' title='close'><img src={CloseIcon} alt="" /></button>
+					</div>
 				<div>
-					<h3>Sube tu pago aqui</h3>
+					
+					
 					{imagePay ?
 						<img src={URL.createObjectURL(imagePay)} alt="" />
 						
