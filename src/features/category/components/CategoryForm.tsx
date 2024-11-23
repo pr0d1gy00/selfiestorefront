@@ -43,7 +43,7 @@ console.log(id)
         e.preventDefault()
 		if(!id){
 			dispatch({type:"registerCategory",payload:{category:name}})
-			setShowAlert(true)
+			setTimeout(()=>setShowAlert(true),400)
 			setTimeout(()=>{
 				setShowAlert(false)
 			},3000)

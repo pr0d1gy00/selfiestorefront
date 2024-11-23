@@ -8,7 +8,7 @@ export async function LogoutUser({id,logged_id,name_user}:{id:string,logged_id:b
 		},
 		body:JSON.stringify({
 			Id:id,
-			logged_id:logged_id,
+			logged_id:true,
 			Name_user:name_user
 		})
 	})

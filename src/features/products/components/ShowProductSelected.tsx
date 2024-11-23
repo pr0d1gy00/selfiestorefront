@@ -38,7 +38,7 @@ export default function ShowProductSelected() {
 		})
 	},[id])
 	//OPTIMIZAR CON EVENTO EN EL BOTON
-	console.log(state?.cart);
+	console.log(images);
 
 	useEffect(() => {
 		if (!idAddToCart) return;

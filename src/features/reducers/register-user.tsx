@@ -289,15 +289,16 @@ export const RegisterReducer = (
 				password: actions.payload.password,
 			})
 				.then((response) => {
-					setSuccess(true);
-					console.log(response);
-					setError(false);
 					sessionStorage.setItem(
 						"login",
 						JSON.stringify(response)
 					);
 					state.userLoggedIn = response;
-					window.location.assign('/')
+					if(state.userLoggedIn.token){
+						setSuccess(true);
+
+					}
+					setError(false);
 
 				})
 				.catch((error) => {
@@ -308,10 +309,9 @@ export const RegisterReducer = (
 			break;
 		}
         case "logoutUser":{
-			LogoutUser({id:state.userLoggedIn.Id,logged_id:state.userLoggedIn.logged_id,name_user:state.userLoggedIn.Name_user}).then(response=>{
+			LogoutUser({id:state.userLoggedIn.data.Id,logged_id:state?.userLoggedIn.data.logged_id,name_user:state.userLoggedIn.data.Name_user}).then(response=>{
 				if(response.ok){
 					sessionStorage.removeItem('login')
-					window.location.reload()
 				}
 			}).catch(error=>console.log(error))
             break
@@ -405,7 +405,7 @@ export const RegisterReducer = (
 		case "sendBuyCart": {
 			if (!state.userLoggedIn) return;
 			const data = {
-				User_id: state.userLoggedIn.Id,
+				User_id: state.userLoggedIn.data.Id,
 				Products: state.cart.map((products) => ({
 					Product_id: products.id,
 					Amount_product: products.quantity.toString(),

@@ -9,7 +9,6 @@ export type CartItem = ProductCartInterfaces&{
 	quantityMax:number
 }
 export type SendBuy = {
-	User_id:string,
 	Products:{
 		Product_id: string,
 		Amount_product: string,

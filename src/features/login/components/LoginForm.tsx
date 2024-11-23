@@ -2,7 +2,7 @@ import LoginCSS from '../styles/login.module.css'
 import Title from '../../ui/title/components/Title'
 import Input from '../../ui/inputs/components/Input'
 import ButtonRegisterLogin from '../../ui/buttons/components/ButtonRegisterLogin'
-import { ChangeEvent, Dispatch, FormEvent, useContext, useState } from 'react'
+import { ChangeEvent, Dispatch, FormEvent, useContext, useEffect, useState } from 'react'
 import { RegisterActions } from '../../reducers/register-user'
 import { RegisterContext } from '../../register/context/RegisterContext'
 import { useNavigate } from 'react-router-dom'
@@ -16,14 +16,14 @@ type LoginUserProps={
 	state:{id:string,password:string} | undefined
 	dispatch:Dispatch<RegisterActions>
 }
-export default function LoginForm({state,dispatch}:LoginUserProps) {
+export default function LoginForm({dispatch}:LoginUserProps) {
     const context = useContext(RegisterContext)
     const [infoLogin,setInfoLogin]=useState(initialState)
     const [showAlert, setShowAlert]=useState(false)
     if (!context) {
         throw new Error('RegisterContext must be used within a RegisterProvider');
     }
-    const {success,msj}=context
+    const {success,msj,}=context
     const navigate = useNavigate();
 
     const handleChange =(e:ChangeEvent<HTMLInputElement>)=>{
@@ -37,19 +37,20 @@ export default function LoginForm({state,dispatch}:LoginUserProps) {
         e.preventDefault()
         console.log(dispatch)
         dispatch({type:'loginUser',payload:{id:infoLogin.id,password:infoLogin.password}})
-        setTimeout(()=>setShowAlert(true)
-        ,800)
+        setTimeout(()=>setShowAlert(true),400)
         setTimeout(() => {
             setShowAlert(false)
-            
-        }, 3000)
-        setTimeout(()=>{
-
-            navigate('/')
-        },1500)
-        
-        
+        }, 3000)       
     }
+    // useEffect(()=>{
+    //     setTimeout(()=>{
+    //         if(success){
+    //         navigate('/')
+    //     }
+    //     },1000)
+        
+    // },[success])
+    
     return (
         <section className={LoginCSS.loginContainer}>
             {showAlert && (success ?
@@ -75,7 +76,7 @@ export default function LoginForm({state,dispatch}:LoginUserProps) {
                             id='password'
                             onChange={handleChange}
                         />
-                        <ButtonRegisterLogin type="submit" title={'Ingresar'}/>
+                        <ButtonRegisterLogin type="submit" title={'Ingresar'} disabled={!infoLogin.id || !infoLogin.password}/>
                     </form>
                 </div>
             

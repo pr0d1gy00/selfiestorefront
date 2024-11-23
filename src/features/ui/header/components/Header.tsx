@@ -31,12 +31,17 @@ type HeaderProps = {
 	state: registerState | undefined;
 };
 const loginInitialState = {
-	logged_id: false,
-	Id: "",
-	Name_user: "",
-	Last_name: "",
-	Phome_number: "",
-	Rol_id: "",
+	message:"",
+	token:"",
+	data:{
+		logged_id: false,
+		Id: "",
+		Name_user: "",
+		Last_name: "",
+		Phome_number: "",
+		Rol_id: "",
+		
+	}
 };
 export default function Header({
 	showSidebar,
@@ -61,7 +66,6 @@ export default function Header({
 	const [showCart, setShowCart] = useState(false);
 	const [showFinishBuy, setShowFinishBuy] = useState(false);
 	const [productsSend, setProductsSend] = useState<SendBuy>({
-		User_id: "",
 		Products: [],
 	});
 	const [loginSession, setLoginSession] =
@@ -81,7 +85,7 @@ export default function Header({
 		if (!state) return;
 		setProductsToShow(state.cart);
 		const data = {
-			User_id: state.userLoggedIn.Id,
+			//User_id: state ? state.userLoggedIn.data.Id : '00000000', 
 			Products: state.cart.map((products) => ({
 				Product_id: products.id,
 				Amount_product: products.quantity
@@ -102,12 +106,12 @@ export default function Header({
 		}
 	}, [showFinishBuy, success]);
 	useEffect(() => {
-		if (!state?.userLoggedIn) return setLoginSession(loginInitialState);
+		if (!state?.userLoggedIn.token) return setLoginSession(loginInitialState);
 
 		setLoginSession(state?.userLoggedIn);
 
 	}, [state?.userLoggedIn]);
-
+	console.log(state?.userLoggedIn)
 	return (
 		<header className={HeaderCSS.header}>
 			{showFinishBuy &&
@@ -153,7 +157,7 @@ export default function Header({
 			) : null}
 
 			<div className={HeaderCSS.buttonLoginCartContainer}>
-				{state?.userLoggedIn.logged_id ? (
+				{state?.userLoggedIn.token ? (
 					<div className={HeaderCSS.containerInfoLogged}>
 						<button
 							title="logut"
@@ -166,9 +170,9 @@ export default function Header({
 							<img src={LogoutIcon} alt="" />
 						</button>
 						<p>
-							{loginSession.Name_user +
+							{loginSession.data.Name_user +
 								" " +
-								loginSession.Last_name}
+								loginSession.data.Last_name}
 						</p>
 					</div>
 				) : (

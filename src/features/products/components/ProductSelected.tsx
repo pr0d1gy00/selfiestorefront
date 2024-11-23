@@ -36,7 +36,7 @@ export default function ProductSelected({title,ammount,description,price,images,
 	const next = ()=>{
 		selectedNewImage(selectedIndex, image)
 	}
-
+	console.log(image)
 	return (
 		<section className={ProductsCSS.productSelectedContainer}>
 			<div className={ProductsCSS.imageProductSelectedContainer}>

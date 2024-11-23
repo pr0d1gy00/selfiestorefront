@@ -1,10 +1,14 @@
 export type loginProps={
-	logged_id: boolean,
-    Id:string,
-    Name_user: string,
-    Last_name: string,
-    Phome_number: string,
-    Rol_id: string
+	message: string,
+    token:string,
+	data:{
+		logged_id: boolean,
+		Id:string,
+		Name_user: string,
+		Last_name: string,
+		Phome_number: string,
+		Rol_id: string
+	}
 }
 
 
